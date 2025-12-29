@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- 背景圖片層次 -->
+    <FrameLayout
+        android:id="@+id/backgroundContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 關卡 ViewPager2 (島嶼) -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/levelViewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="180dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/barrier_bottom_buttons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ===== 新增的滑動提示箭頭 (Level Swipe Indicators) ===== -->
+
+    <!-- 1. 向左箭頭 (提示向左滑動) -->
+    <!-- 定位：錨定在 imageButton4 上方，並與其左邊對齊 -->
+    <ImageView
+        android:id="@+id/arrow_left_indicator"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_arrow_left"
+        android:contentDescription="向左滑動提示"
+        app:layout_constraintBottom_toTopOf="@id/imageButton4"
+        app:layout_constraintStart_toStartOf="@id/imageButton4"
+        android:layout_marginBottom="8dp"
+        android:translationY="-190dp"
+        android:alpha="0.6" />
+
+    <!-- 2. 向右箭頭 (提示向右滑動) -->
+    <!-- 定位：錨定在 imageButton2 上方，並與其右邊對齊 -->
+    <ImageView
+        android:id="@+id/arrow_right_indicator"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_arrow_right"
+        android:contentDescription="向右滑動提示"
+        app:layout_constraintBottom_toTopOf="@id/imageButton2"
+        app:layout_constraintEnd_toEndOf="@id/imageButton2"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="8dp"
+        android:translationY="-190dp"
+        android:alpha="0.6" />
+
+    <!-- ======================================================= -->
+
+
+    <!-- 頂部與右側按鈕 -->
+    <ImageView
+        android:id="@+id/TeamLogo1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/teamlogo_1"
+        android:contentDescription="@string/Team_logo_1_description"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:contentDescription="@string/button6_description"
+        android:src="@drawable/ic_button6"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:contentDescription="@string/button1_description"
+        android:src="@drawable/ic_button1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton6" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:contentDescription="@string/button5_description"
+        android:src="@drawable/ic_button5"
+        android:visibility="gone"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton1" />
+
+    <!-- 底部按鈕 -->
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:contentDescription="@string/button2_description"
+        android:padding="8dp"
+        android:src="@drawable/ic_button2"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:contentDescription="@string/button4_description"
+        android:padding="8dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/ic_button4"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_bottom_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="imageButton2,imageButton4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

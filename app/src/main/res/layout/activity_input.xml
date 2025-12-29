@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InputActivity">
+
+    <ImageView
+        android:id="@+id/noteinputbackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/noteinputbackground"
+        android:contentDescription="日記背景圖片" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2025年10月11日"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/titleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="標題"
+            android:inputType="text"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/black"
+            android:textColorHint="#CCCCCC"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="8dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="40dp"/>
+
+        <ImageView
+            android:id="@+id/photoUploadArea"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_upload_photo"
+            android:scaleType="centerCrop"
+            android:background="@android:color/transparent"
+            android:contentDescription="上傳照片區域"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/question1TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. 你覺得今天值得珍藏的事情是什麼？"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/content1EditText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="請寫下你的回答..."
+            android:gravity="top|start"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/black"
+            android:textColorHint="#CCCCCC"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/question2TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. 你現在感受到自己有什麼情緒呢？"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/content2EditText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="請寫下你的回答..."
+            android:gravity="top|start"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/black"
+            android:textColorHint="#CCCCCC"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/question3TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. 觀察一下，你有發現自己的小改變嗎？"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/content3EditText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="請寫下你的回答..."
+            android:gravity="top|start"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/black"
+            android:textColorHint="#CCCCCC"
+            android:padding="8dp"/>
+
+    </LinearLayout>
+    <ImageButton
+        android:id="@+id/completeButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/completebutton"/>
+
+</RelativeLayout>

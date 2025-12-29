@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 這是針對 sw720dp (平板，如 Galaxy Tab S8) 設計的佈局，採用寬螢幕優化 -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/level_root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LevelActivity">
+
+    <!-- 背景容器 (全螢幕) -->
+    <FrameLayout
+        android:id="@+id/levelBackgroundContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 核心內容區 (中上) -->
+
+    <!-- 植物成長進度條 -->
+    <ProgressBar
+        android:id="@+id/plantProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/progress_bar_custom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 能量文字 -->
+    <TextView
+        android:id="@+id/energyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginTop="-55dp"
+        android:layout_marginStart="150dp"
+        android:translationY="-20dp"
+        app:layout_constraintEnd_toEndOf="@+id/plantProgressBar"
+        app:layout_constraintStart_toStartOf="@+id/plantProgressBar"
+        app:layout_constraintTop_toBottomOf="@+id/plantProgressBar" />
+
+    <!-- 計時器 (時間應在進度條下方或顯眼處) -->
+    <TextView
+        android:id="@+id/timerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:shadowColor="#30000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="8"
+        android:text="00:00"
+        android:textColor="#FFFFFF"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/energyTextView" />
+
+    <!-- 放大植物氣泡 (與 LevelActivity 保持一致，但尺寸加大) -->
+    <ImageView
+        android:id="@+id/plant_image_bubble"
+        android:layout_width="900dp"
+        android:layout_height="900dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/plant_image_bubble"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <!-- 放大植物圖像 (與 LevelActivity 保持一致，但尺寸加大) -->
+    <ImageView
+        android:id="@+id/plant_image_view"
+        android:layout_width="730dp"
+        android:layout_height="730dp"
+        android:contentDescription="當前種植的植物"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/plant_image_bubble"
+        app:layout_constraintEnd_toEndOf="@+id/plant_image_bubble"
+        app:layout_constraintStart_toStartOf="@+id/plant_image_bubble"
+        app:layout_constraintTop_toTopOf="@+id/plant_image_bubble" />
+
+    <!-- 浮動能量動畫 -->
+    <ImageView
+        android:id="@+id/floatingEnergyAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:elevation="10dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintTop_toTopOf="@+id/plant_image_view"
+        app:layout_constraintBottom_toBottomOf="@+id/plant_image_view"
+        app:layout_constraintStart_toStartOf="@+id/plant_image_view"
+        app:layout_constraintEnd_toEndOf="@+id/plant_image_view"
+        android:contentDescription="浮動能量動畫" />
+
+    <!-- 🌟 右上角按鈕組 (與 MainActivity 同步尺寸與位置) 🌟 -->
+
+    <!-- ImageButton6 (最大的那個 GIF 按鈕) -->
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/button6_description"
+        android:src="@drawable/ic_button6"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ImageButton1 (在 6 的下方) -->
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:contentDescription="@string/button1_description"
+        android:src="@drawable/ic_button1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton6"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton6" />
+
+    <!-- ImageButton5 (在 1 的下方) -->
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:contentDescription="@string/button5_description"
+        android:src="@drawable/ic_button5"
+        android:visibility="gone"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton1"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton1" />
+
+    <!-- ImageButton8 (與 TeamLogo1 對稱放置) -->
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button8"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/button8_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 重設能量按鈕 (文字按鈕，保持在中間，遠離其他按鈕) -->
+    <Button
+        android:id="@+id/resetEnergyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="重設能量"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timerTextView" />
+
+    <!-- 🌟 底部按鈕組 🌟 -->
+
+    <!-- Pokedex 容器 (左下角) - 必須保留此結構來容納徽章 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pokedex_button_container"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- ImageButton4 (圖鑑按鈕) -->
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:contentDescription="@string/button4_description"
+            android:padding="24dp"
+            android:src="@drawable/ic_button4"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- GIF 徽章圖像 (用於顯示通知點或新內容) -->
+        <ImageView
+            android:id="@+id/gif_badge_image"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="-35dp"
+            android:layout_marginEnd="-15dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_button4_reddot" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- ImageButton2 (右下角) -->
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:contentDescription="@string/button2_description"
+        android:padding="24dp"
+        android:src="@drawable/ic_button2"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- ImageButton3 (底部中央，主要的點擊/互動按鈕) -->
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_marginBottom="35dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/button3_description"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintStart_toEndOf="@+id/pokedex_button_container" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

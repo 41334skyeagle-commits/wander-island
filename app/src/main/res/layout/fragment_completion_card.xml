@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/completion_root_container"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp">
+
+    <!-- A. 主要內容卡片 ( 弧角白底卡片背景PNG) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_content_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:background="@drawable/plant_dialog_background">
+
+        <!-- 1. 植物動態圖 (GIF 檔) -->
+        <ImageView
+            android:id="@+id/plant_animation_gif_1"
+            android:layout_width="210dp"
+            android:layout_height="240dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="30dp"
+            android:contentDescription="植物完成動畫"
+            app:layout_constraintTop_toTopOf="@+id/card_content_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 2. 標題為植物名稱 (PNG 檔) -->
+        <ImageView
+            android:id="@+id/plant_name_png_2"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="植物名稱標題"
+            app:layout_constraintTop_toBottomOf="@id/plant_animation_gif_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 3. 已解鎖動態效果文字 (GIF 檔) -->
+        <ImageView
+            android:id="@+id/unlocked_effect_gif_3"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_marginTop="3dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="解鎖動態效果"
+            app:layout_constraintTop_toBottomOf="@id/plant_name_png_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 4. 指引動態文字 (GIF 檔) -->
+        <ImageView
+            android:id="@+id/guide_text_gif_4"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="2dp"
+            android:contentDescription="指引動態文字"
+            app:layout_constraintTop_toBottomOf="@id/unlocked_effect_gif_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 點擊空白處關閉 -->
+    <TextView
+        android:id="@+id/click_to_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:alpha="0.7"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="— 點擊空白處關閉 —"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"/>
+
+</LinearLayout>

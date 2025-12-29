@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InputActivity">
+
+    <ImageView
+        android:id="@+id/noteinputbackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/noteinputbackground"
+        android:contentDescription="日記背景圖片" />
+
+    <!-- 固定的完成按鈕 (保持在右下角) -->
+    <ImageButton
+        android:id="@+id/completeButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/completebutton"
+        android:contentDescription="完成並儲存按鈕"/> <!-- 將 margin 設置為與 padding 一致，方便控制 -->
+
+    <!-- ScrollView 包含所有輸入內容，且位於按鈕上方 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/completeButton"
+        android:paddingBottom="16dp"> <!-- 增加底部間距，讓內容不緊貼按鈕區域 -->
+
+        <!-- 所有的內容欄位 (日期, 標題, 照片, Q&A) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2025年10月11日"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="標題"
+                android:inputType="text"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/black"
+                android:textColorHint="#CCCCCC"
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="8dp"
+                android:textAlignment="center"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="10dp"
+                android:textSize="32sp"/>
+
+            <ImageView
+                android:id="@+id/photoUploadArea"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_upload_photo"
+                android:scaleType="centerCrop"
+                android:background="@android:color/transparent"
+                android:contentDescription="上傳照片區域"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="10dp"/>
+
+            <!-- Q1 -->
+            <TextView
+                android:id="@+id/question1TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. 你覺得今天值得珍藏的事情是什麼？"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/content1EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:hint="請寫下你的回答..."
+            android:minHeight="100dp"
+            android:gravity="top|start"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/black"
+            android:textColorHint="#CCCCCC"
+            android:padding="8dp"
+            android:textSize="20sp"/>
+
+            <!-- Q2 -->
+            <TextView
+                android:id="@+id/question2TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2. 你現在感受到自己有什麼情緒呢？"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/content2EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:hint="請寫下你的回答..."
+            android:minHeight="100dp"
+            android:gravity="top|start"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/black"
+            android:textColorHint="#CCCCCC"
+            android:padding="8dp"
+            android:textSize="20sp"/>
+
+            <!-- Q3 -->
+            <TextView
+                android:id="@+id/question3TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3. 觀察一下，你有發現自己的小改變嗎？"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/content3EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:hint="請寫下你的回答..."
+            android:minHeight="100dp"
+            android:gravity="top|start"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/black"
+            android:textColorHint="#CCCCCC"
+            android:padding="8dp"
+            android:textSize="20sp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

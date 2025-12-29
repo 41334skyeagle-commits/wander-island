@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/claimSeedRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- 標題圖片 -->
+    <ImageView
+        android:id="@+id/titleImage"
+        android:layout_width="360dp"
+        android:layout_height="100dp"
+        android:src="@drawable/claim_seed_title"
+        android:contentDescription="@null"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 敘述圖片  -->
+    <ImageView
+        android:id="@+id/descriptionImage"
+        android:layout_width="500dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/claim_seed_description"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toTopOf="@+id/confirmButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleImage" />
+
+    <!-- 確認按鈕  -->
+    <ImageView
+        android:id="@+id/confirmButton"
+        android:layout_width="180dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="6dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/claim_seed_confirm"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

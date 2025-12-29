@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detail_root_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A000000">
+
+    <!-- 1. 卡片容器：強制寬度為 320dp，並根據圖片比例 1064:1275 計算高度 -->
+    <FrameLayout
+        android:id="@+id/cardContainer"
+        android:layout_width="320dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1064:1275"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 詳解大圖：填滿容器 -->
+        <ImageView
+            android:id="@+id/img_main_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+        <!-- 流光元件：撐滿容器高度 -->
+        <View
+            android:id="@+id/shimmerRay"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:background="@drawable/shimmer_light_ray" />
+
+    </FrameLayout>
+
+    <!-- 2. 點擊空白處關閉提示 -->
+    <TextView
+        android:id="@+id/tv_click_to_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:alpha="0.7"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="— 點擊空白處關閉 —"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardContainer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

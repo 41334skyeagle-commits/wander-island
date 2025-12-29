@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/img_combined_background_large"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:contentDescription="日記大版縮圖背景與裝飾"
+        android:scaleType="centerCrop"
+        android:paddingEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_note_large_combined" />
+
+    <TextView
+        android:id="@+id/tv_year_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:text="2025"
+        app:layout_constraintStart_toStartOf="@id/img_combined_background_large"
+        app:layout_constraintTop_toTopOf="@id/img_combined_background_large" />
+
+    <TextView
+        android:id="@+id/tv_month_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/tv_year_large"
+        app:layout_constraintTop_toBottomOf="@id/tv_year_large"
+        tools:text="05 月"/>
+
+
+    <TextView
+        android:id="@+id/tv_day_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-3dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/tv_month_large"
+        app:layout_constraintTop_toBottomOf="@id/tv_month_large"
+        tools:text="29 日" />
+
+    <TextView
+        android:id="@+id/tv_title_large"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="10dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="15sp"
+        tools:text="這是我今天給我的橡果澆水時，它給我的第一聲問候！"
+        app:layout_constraintStart_toEndOf="@id/tv_month_large"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

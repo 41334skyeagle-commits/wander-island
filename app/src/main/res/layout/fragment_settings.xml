@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="@android:color/transparent"
+    tools:context=".SettingsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/settings_content_panel"
+        android:layout_width="0dp"
+        android:layout_height="500dp" android:background="#95E1F5FE"
+        android:padding="24dp"
+        android:elevation="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintVertical_bias="0.5">
+
+        <ImageView
+            android:id="@+id/settingPageTitleImage"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:src="@drawable/settingpagetitle"
+            android:contentDescription="設定頁面標題"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="9dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <ImageView
+            android:id="@+id/settingexImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/settingex"
+            android:contentDescription="測試"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toBottomOf="@+id/settingPageTitleImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="9dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <TextView
+            android:id="@+id/sound_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@+id/settingPageTitleImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/switchSound"
+            app:layout_constraintHorizontal_weight="1"
+            android:layout_marginTop="35dp"/>
+
+        <Switch
+            android:id="@+id/switchSound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:thumbTint="@color/light_blue_500"
+            android:trackTint="@color/light_blue_200"
+            app:layout_constraintTop_toTopOf="@+id/sound_label"
+            app:layout_constraintBottom_toBottomOf="@+id/sound_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/music_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@+id/sound_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/switchMusic"
+            app:layout_constraintHorizontal_weight="1"
+            android:layout_marginTop="60dp"/>
+
+        <Switch
+            android:id="@+id/switchMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:thumbTint="@color/light_blue_500"
+            android:trackTint="@color/light_blue_200"
+            app:layout_constraintTop_toTopOf="@+id/music_label"
+            app:layout_constraintBottom_toBottomOf="@+id/music_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/notification_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@+id/music_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/switchNotification"
+            app:layout_constraintHorizontal_weight="1"
+            android:layout_marginTop="70dp"/>
+
+        <Switch
+            android:id="@+id/switchNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:thumbTint="@color/light_blue_500"
+            android:trackTint="@color/light_blue_200"
+            app:layout_constraintTop_toTopOf="@+id/notification_label"
+            app:layout_constraintBottom_toBottomOf="@+id/notification_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/buttonCloseSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="關閉"
+            android:textColor="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@+id/notification_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="70dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

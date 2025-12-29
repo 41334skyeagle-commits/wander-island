@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pokedex_root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PokedexActivity">
+
+    <!-- 頂部島嶼 ViewPager2 (橫幅) -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/islandViewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@id/islandPlantDividerGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ===== 新增的滑動提示箭頭 (Island Swipe Indicators) ===== -->
+
+    <!-- 1. 向左箭頭 (提示向左滑動) -->
+    <ImageView
+        android:id="@+id/arrow_left_pokedex_indicator"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_arrow_left"
+        android:contentDescription="向左滑動提示"
+        android:alpha="0.8"
+        app:layout_constraintStart_toStartOf="@id/islandViewPager"
+        app:layout_constraintTop_toTopOf="@id/islandViewPager"
+        app:layout_constraintBottom_toTopOf="@id/islandPlantDividerGuideline" />
+
+    <!-- 2. 向右箭頭 (提示向右滑動) -->
+    <ImageView
+        android:id="@+id/arrow_right_pokedex_indicator"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_arrow_right"
+        android:contentDescription="向右滑動提示"
+        android:alpha="0.8"
+        app:layout_constraintEnd_toEndOf="@id/islandViewPager"
+        app:layout_constraintTop_toTopOf="@id/islandViewPager"
+        app:layout_constraintBottom_toTopOf="@id/islandPlantDividerGuideline" />
+
+    <!-- ======================================================= -->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/islandPlantDividerGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <!-- 底部植物列表 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/plantRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#FFFFFF"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/islandPlantDividerGuideline"
+        tools:listitem="@layout/item_plant" />
+
+    <!-- 返回按鈕 (保持在最上層) -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="返回上一頁按鈕"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_back_arrow"
+        android:elevation="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/dimOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:alpha="0"
+        android:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

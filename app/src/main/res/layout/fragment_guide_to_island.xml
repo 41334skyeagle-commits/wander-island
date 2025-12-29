@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/guideRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- 中央字卡內容容器 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 1. 標題 -->
+        <ImageView
+            android:id="@+id/guideTitle"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:contentDescription="@null"
+            android:src="@drawable/guidetoisland_title" />
+
+        <!-- 間距 8dp -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <!-- 2. 敘述容器 (流光動畫發生的區域) -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/descriptionContainer"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content">
+
+            <!-- 敘述圖片 (底圖) -->
+            <ImageView
+                android:id="@+id/guideDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:src="@drawable/guidetoisland_description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 流光條 (疊加層) -->
+            <View
+                android:id="@+id/shimmerRay"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="0.8"
+                android:background="@drawable/shimmer_light_ray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                android:translationX="-100dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 間距 12dp -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <!-- 3. 確認按鈕 -->
+        <ImageView
+            android:id="@+id/guideConfirm"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:clickable="true"
+            android:contentDescription="@null"
+            android:focusable="true"
+            android:src="@drawable/guidetoisland_confirm" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

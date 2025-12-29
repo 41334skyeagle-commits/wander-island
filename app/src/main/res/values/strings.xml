@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Wander Island</string>
+    <string name="Background_image_description">背景圖片</string>
+    <string name="button1_description">前往設定</string>
+    <string name="button2_description">前往植物日誌</string>
+    <string name="button3_description">開始接觸自然</string>
+    <string name="button4_description">前往圖鑑</string>
+    <string name="button5_description">前往任務</string>
+    <string name="button6_description">前往使用者頁面</string>
+    <string name="button7_description">能量長條</string>
+    <string name="button8_description">返回島嶼</string>
+    <string name="Team_logo_1_description">白色logo</string>
+</resources>
