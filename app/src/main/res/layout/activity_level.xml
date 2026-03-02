@@ -17,6 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
         android:layout_width="wrap_content"
@@ -28,7 +29,7 @@
         android:id="@+id/timerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="140dp"
         android:shadowColor="#30000000"
         android:shadowDx="2"
         android:shadowDy="2"
@@ -111,13 +112,13 @@
         android:id="@+id/floatingEnergyAnimation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:contentDescription="浮動能量動畫"
         android:elevation="10dp"
-        app:layout_constraintTop_toTopOf="@+id/plant_image_view"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/plant_image_view"
-        app:layout_constraintStart_toStartOf="@+id/plant_image_view"
         app:layout_constraintEnd_toEndOf="@+id/plant_image_view"
-        android:contentDescription="浮動能量動畫" />
+        app:layout_constraintStart_toStartOf="@+id/plant_image_view"
+        app:layout_constraintTop_toTopOf="@+id/plant_image_view" />
 
     <ImageView
         android:id="@+id/plant_image_bubble"
@@ -135,6 +136,7 @@
         android:id="@+id/imageButton6"
         android:layout_width="95dp"
         android:layout_height="95dp"
+        android:layout_marginTop="45dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/button6_description"
         android:minWidth="48dp"
@@ -178,6 +180,7 @@
         android:contentDescription="@string/button2_description"
         android:minWidth="48dp"
         android:minHeight="48dp"
+        android:layout_marginEnd="-5dp"
         android:padding="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button2"
@@ -188,6 +191,7 @@
         android:id="@+id/pokedex_button_container"
         android:layout_width="130dp"
         android:layout_height="130dp"
+        android:layout_marginStart="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent">
@@ -243,9 +247,10 @@
 
     <ImageButton
         android:id="@+id/imageButton3"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="4dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/button3_description"
         android:padding="8dp"

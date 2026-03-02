@@ -87,7 +87,8 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
     private fun setupViewPager() {
         val levelStaticImageResIds = listOf(
             R.drawable.level_1_icon, R.drawable.level_2_icon,
-            R.drawable.level_3_icon, R.drawable.level_4_icon, R.drawable.level_5_icon
+            R.drawable.level_3_icon, R.drawable.level_4_icon,
+            R.drawable.level_5_icon
         )
 
         val levelAdapter = LevelPagerAdapter(this, levelStaticImageResIds) { islandId ->
@@ -149,8 +150,10 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
                 backgroundContainer.addView(imageView)
                 Glide.with(this).load(background.drawableRes).centerCrop().into(imageView)
             }
+
             is IslandBackground.CompositeLayout -> {
-                val layoutView = layoutInflater.inflate(background.layoutRes, backgroundContainer, false)
+                val layoutView =
+                    layoutInflater.inflate(background.layoutRes, backgroundContainer, false)
                 backgroundContainer.addView(layoutView)
                 // 掃描佈局內需要播放 GIF 的元件
                 startGifsInLayout(layoutView)
@@ -211,7 +214,8 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
 
     override fun onApplyBlurEffect(apply: Boolean) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val blur = if (apply) RenderEffect.createBlurEffect(15f, 15f, Shader.TileMode.CLAMP) else null
+            val blur =
+                if (apply) RenderEffect.createBlurEffect(15f, 15f, Shader.TileMode.CLAMP) else null
             findViewById<View>(R.id.main).setRenderEffect(blur)
         }
     }
@@ -219,7 +223,12 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
     override fun onResume() {
         super.onResume()
         if (::sharedPreferences.isInitialized) {
-            applyMusicSetting(sharedPreferences.getBoolean(SettingsFragment.KEY_MUSIC_ENABLED, true))
+            applyMusicSetting(
+                sharedPreferences.getBoolean(
+                    SettingsFragment.KEY_MUSIC_ENABLED,
+                    true
+                )
+            )
         }
     }
 }
