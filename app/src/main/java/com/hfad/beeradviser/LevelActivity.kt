@@ -55,6 +55,10 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
     private lateinit var plantImageView: ImageView
     private lateinit var imageButton6: ImageButton
     private lateinit var floatingEnergyAnimation: ImageView
+    private lateinit var timerWaveOverlay: ImageView
+
+    // ic_button3 的逐格動畫控制器（播放中/暫停中各一組）
+    private var startStopLoopAnimation: android.graphics.drawable.AnimationDrawable? = null
 
     private var startTime: Long = 0L
     private val handler = Handler(Looper.getMainLooper())
@@ -111,6 +115,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         imageButton6 = findViewById(R.id.imageButton6)
         loadGifIntoImageButton6(imageButton6)
         floatingEnergyAnimation = findViewById(R.id.floatingEnergyAnimation)
+        timerWaveOverlay = findViewById(R.id.timerWaveOverlay)
 
 
         sharedPreferences = getSharedPreferences(SettingsFragment.PREFS_NAME, Context.MODE_PRIVATE)
@@ -119,6 +124,8 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
 
 
         setButtonState(true)
+        // 初始狀態：尚未開始計時，顯示「播放中」迴圈逐格動畫
+        updateStartStopButtonLoopAnimation(isTimerRunning = false)
 
         noteButton.setOnClickListener {
             val intent = Intent(this, ActivityB::class.java)
@@ -183,10 +190,14 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         startStopButton.setOnClickListener {
             if (!isTimerRunning) {
                 startTimer()
-                startStopButton.setImageResource(R.drawable.ic_media_pause)
+                playTimerWaveEffect(isStartAction = true)
+                // 切換成「暫停」逐格動畫（持續循環直到再次被按）
+                updateStartStopButtonLoopAnimation(isTimerRunning = true)
             } else {
                 stopTimer()
-                startStopButton.setImageResource(R.drawable.ic_media_play)
+                playTimerWaveEffect(isStartAction = false)
+                // 切換成「播放」逐格動畫（持續循環直到再次被按）
+                updateStartStopButtonLoopAnimation(isTimerRunning = false)
             }
             playClickSound()
         }
@@ -245,6 +256,97 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         } else {
             println("Android 版本低於 API 31，無法應用 RenderEffect 模糊。")
         }
+    }
+
+    /**
+     * 依據計時狀態，切換 ic_button3 的逐格動畫。
+     * - 計時中：ic_mediapause_000 ~ ic_mediapause_038
+     * - 暫停中：ic_mediaplay_000 ~ ic_mediaplay_037
+     * 目標播放速率：15 FPS（每幀約 66ms）
+     */
+    private fun updateStartStopButtonLoopAnimation(isTimerRunning: Boolean) {
+        startStopLoopAnimation?.stop()
+
+        val animation = if (isTimerRunning) {
+            buildFrameAnimation(prefix = "ic_mediapause_", start = 0, end = 38, fps = 15)
+        } else {
+            buildFrameAnimation(prefix = "ic_mediaplay_", start = 0, end = 37, fps = 15)
+        }
+
+        if (animation != null) {
+            startStopLoopAnimation = animation
+            startStopButton.setImageDrawable(animation)
+            animation.start()
+        } else {
+            // 若尚未匯入逐格圖，保留可執行性（fallback 到既有靜態圖）
+            val fallbackRes = if (isTimerRunning) R.drawable.ic_media_pause else R.drawable.ic_media_play
+            startStopButton.setImageResource(fallbackRes)
+        }
+    }
+
+    /**
+     * 動態組裝逐格動畫，避免在 XML animation-list 內綁死資源，
+     * 讓你只要把對應檔名的 PNG 匯入即可直接生效。
+     */
+    private fun buildFrameAnimation(prefix: String, start: Int, end: Int, fps: Int): android.graphics.drawable.AnimationDrawable? {
+        val frameDurationMs = (1000f / fps).toInt().coerceAtLeast(1)
+        val animation = android.graphics.drawable.AnimationDrawable().apply {
+            isOneShot = false
+        }
+
+        for (index in start..end) {
+            val frameName = String.format(Locale.US, "%s%03d", prefix, index)
+            val frameResId = resources.getIdentifier(frameName, "drawable", packageName)
+            if (frameResId == 0) {
+                Log.w(TAG, "逐格動畫缺少資源：$frameName，改用 fallback 靜態圖。")
+                return null
+            }
+            val frameDrawable = resources.getDrawable(frameResId, theme)
+            animation.addFrame(frameDrawable, frameDurationMs)
+        }
+
+        return animation
+    }
+
+    /**
+     * 播放開始/暫停時的擴散補間效果。
+     * - 開始：tweenani_play
+     * - 暫停：tweenani_pause
+     * 效果：從按鈕中心勻速放大到覆蓋全畫面，並同步淡出。
+     */
+    private fun playTimerWaveEffect(isStartAction: Boolean) {
+        val drawableName = if (isStartAction) "tweenani_play" else "tweenani_pause"
+        val resId = resources.getIdentifier(drawableName, "drawable", packageName)
+        if (resId == 0) {
+            Log.w(TAG, "找不到補間動畫資源：$drawableName，略過擴散效果。")
+            return
+        }
+
+        timerWaveOverlay.setImageResource(resId)
+        timerWaveOverlay.visibility = View.VISIBLE
+        timerWaveOverlay.alpha = 0.9f
+        timerWaveOverlay.scaleX = 1f
+        timerWaveOverlay.scaleY = 1f
+
+        // 以螢幕對角線計算需要的放大倍率，確保覆蓋全畫面。
+        val root = findViewById<View>(R.id.level_root_layout)
+        val baseSize = maxOf(timerWaveOverlay.width, timerWaveOverlay.height, 1)
+        val diagonal = kotlin.math.hypot(root.width.toDouble(), root.height.toDouble()).toFloat()
+        val targetScale = ((diagonal / baseSize) * 1.2f).coerceAtLeast(1.5f)
+
+        timerWaveOverlay.animate()
+            .scaleX(targetScale)
+            .scaleY(targetScale)
+            .alpha(0f)
+            .setDuration(900L)
+            .setInterpolator(android.view.animation.LinearInterpolator())
+            .withEndAction {
+                timerWaveOverlay.visibility = View.GONE
+                timerWaveOverlay.alpha = 0f
+                timerWaveOverlay.scaleX = 1f
+                timerWaveOverlay.scaleY = 1f
+            }
+            .start()
     }
 
     private fun playClickSound() {
@@ -680,6 +782,10 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         // 停止 Stage 3 輪播動畫
         stopStage3Animation()
 
+        startStopLoopAnimation?.stop()
+        timerWaveOverlay.animate().cancel()
+        timerWaveOverlay.visibility = View.GONE
+
         soundPlayer?.release()
         soundPlayer = null
     }
@@ -695,6 +801,8 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
 
         // 在 onResume 中確保按鈕處於正確的初始狀態
         setButtonState(true)
+        // 初始狀態：尚未開始計時，顯示「播放中」迴圈逐格動畫
+        updateStartStopButtonLoopAnimation(isTimerRunning = false)
         // 在 Activity 重新啟動/返回時更新驚嘆號狀態
         updatePokedexButtonUI()
     }
