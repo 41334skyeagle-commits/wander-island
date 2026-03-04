@@ -47,12 +47,8 @@
         <activity android:name=".LevelActivity" />
         <activity android:name=".PokedexActivity" />
         <activity android:name=".NoteDetailActivity" />
-        <activity
-            android:name=".PlantDetailActivity"
-            android:exported="false" />
 
-
-        <!-- 🌟【關鍵修復】為服務指定前景服務類型 🌟 -->
+        <!-- 為服務指定前景服務類型  -->
         <service
             android:name=".BackgroundMusicService"
             android:exported="false"
