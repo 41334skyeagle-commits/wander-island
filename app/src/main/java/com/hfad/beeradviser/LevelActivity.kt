@@ -534,7 +534,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         }
 
         totalSecondsElapsed = 0L
-        currentEnergy = 0 // 這裡的 currentEnergy 變數不再重要了，因為 UI 已經由 Flow 驅動
+        currentEnergy = 0
 
         energyTextView.text = "0"
         timerTextView.text = "00:00"
@@ -559,7 +559,6 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
                 return@observe
             }
 
-            // 🌟 【新增修正 1】：關鍵島嶼過濾 🌟
             // 收到來自不同島嶼的 LiveData 更新，直接忽略，解決 UI 閃爍問題。
             if (status.islandId != currentIslandId) {
                 Log.w(TAG, "LVA: 忽略跨島狀態。當前 Level ID ${currentIslandId}，收到 Plant ID ${plantId} (島嶼 ${status.islandId})。")
