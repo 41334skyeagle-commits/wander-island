@@ -8,9 +8,10 @@ import android.os.Bundle
 import android.os.Environment
 import android.text.format.DateFormat
 import android.util.Log
+import android.view.View
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -27,17 +28,37 @@ import java.util.Date
 
 class InputActivity : AppCompatActivity() {
 
+    companion object {
+        private const val TAG = "InputActivity"
+
+        // 問題文字改為圖片後，儲存時仍保留固定題目文字，方便詳情頁排版。
+        private const val QUESTION_1 = "1. 你覺得今天值得珍藏的事情是什麼？"
+        private const val QUESTION_2 = "2. 你現在感受到自己有什麼情緒呢？"
+        private const val QUESTION_3 = "3. 觀察一下，你有發現自己的小改變嗎？"
+        private const val QUESTION_4 = "4. 明天你想對自己說什麼？"
+    }
+
     private lateinit var dbHelper: NoteDatabaseHelper
     private lateinit var dateTextView: TextView
     private lateinit var titleEditText: EditText
     private lateinit var photoUploadArea: ImageView
-    private lateinit var question1TextView: TextView
-    private lateinit var question2TextView: TextView
-    private lateinit var question3TextView: TextView
+    private var emotionPromptTextView: TextView? = null
+    private var emotionContainer: View? = null
+    private var niceEmojiImageView: ImageView? = null
+    private var okEmojiImageView: ImageView? = null
+    private var sadEmojiImageView: ImageView? = null
+    private var guideWord1ImageView: ImageView? = null
+    private var guideWord2ImageView: ImageView? = null
+
+    private var question1ImageView: ImageView? = null
+    private var question2ImageView: ImageView? = null
+    private var question3ImageView: ImageView? = null
+    private var question4ImageView: ImageView? = null
 
     private lateinit var content1EditText: EditText
     private lateinit var content2EditText: EditText
     private lateinit var content3EditText: EditText
+    private var content4EditText: EditText? = null
     private lateinit var completeButton: ImageButton
 
     private var latestTmpUri: Uri? = null // 用於保存相機拍照後的臨時 Uri (給 TakePictureLauncher 使用)
@@ -85,13 +106,23 @@ class InputActivity : AppCompatActivity() {
         dateTextView = findViewById(R.id.dateTextView)
         titleEditText = findViewById(R.id.titleEditText)
         photoUploadArea = findViewById(R.id.photoUploadArea)
-        question1TextView = findViewById(R.id.question1TextView)
-        question2TextView = findViewById(R.id.question2TextView)
-        question3TextView = findViewById(R.id.question3TextView)
+        emotionPromptTextView = findViewById(R.id.emotionPromptTextView)
+        emotionContainer = findViewById(R.id.emotionSelectorContainer)
+        niceEmojiImageView = findViewById(R.id.niceEmojiImageView)
+        okEmojiImageView = findViewById(R.id.okEmojiImageView)
+        sadEmojiImageView = findViewById(R.id.sadEmojiImageView)
+        guideWord1ImageView = findViewById(R.id.guideWord1ImageView)
+        guideWord2ImageView = findViewById(R.id.guideWord2ImageView)
+
+        question1ImageView = findViewById(R.id.question1TextView)
+        question2ImageView = findViewById(R.id.question2TextView)
+        question3ImageView = findViewById(R.id.question3TextView)
+        question4ImageView = findViewById(R.id.question4ImageView)
 
         content1EditText = findViewById(R.id.content1EditText)
         content2EditText = findViewById(R.id.content2EditText)
         content3EditText = findViewById(R.id.content3EditText)
+        content4EditText = findViewById(R.id.content4EditText)
         completeButton = findViewById(R.id.completeButton)
         dbHelper = NoteDatabaseHelper(this)
 
@@ -176,6 +207,9 @@ class InputActivity : AppCompatActivity() {
         val formattedDate = DateFormat.format("yyyy年MM月dd日 EEEE", date)
         dateTextView.text = formattedDate
 
+        bindInputDecorations()
+        setupEmotionSelector()
+
         // 2. 設定照片上傳區點擊事件
         photoUploadArea.setOnClickListener {
             checkCameraPermission() // 檢查權限並彈出選擇對話框
@@ -187,29 +221,102 @@ class InputActivity : AppCompatActivity() {
         }
     }
 
+    private fun bindInputDecorations() {
+        bindDrawableByName(guideWord1ImageView, "guideword1")
+        bindDrawableByName(guideWord2ImageView, "guideword2")
+        bindDrawableByName(question1ImageView, "inputq1")
+        bindDrawableByName(question2ImageView, "inputq2")
+        bindDrawableByName(question3ImageView, "inputq3")
+        bindDrawableByName(question4ImageView, "inputq4")
+
+        bindDrawableByName(niceEmojiImageView, "niceemoji")
+        bindDrawableByName(okEmojiImageView, "okemoji")
+        bindDrawableByName(sadEmojiImageView, "sademoji")
+    }
+
+    private fun bindDrawableByName(target: ImageView?, drawableName: String) {
+        target ?: return
+        val resId = resources.getIdentifier(drawableName, "drawable", packageName)
+        if (resId != 0) {
+            target.setImageResource(resId)
+            target.visibility = View.VISIBLE
+        } else {
+            target.visibility = View.GONE
+            Log.w(TAG, "找不到圖片資源：$drawableName")
+        }
+    }
+
+    private fun setupEmotionSelector() {
+        val prompt = emotionPromptTextView ?: return
+        val container = emotionContainer ?: return
+        val emojis = listOfNotNull(niceEmojiImageView, okEmojiImageView, sadEmojiImageView)
+        if (emojis.size < 3) {
+            Log.w(TAG, "情緒選擇器資源缺失，略過互動初始化。")
+            return
+        }
+
+        // 進入頁面預設三顆都縮小，並顯示引導語。
+        prompt.visibility = View.VISIBLE
+        emojis.forEach {
+            it.visibility = View.VISIBLE
+            it.alpha = 1f
+            it.scaleX = 0.72f
+            it.scaleY = 0.72f
+            it.translationX = 0f
+        }
+
+        emojis.forEach { clicked ->
+            clicked.setOnClickListener {
+                prompt.visibility = View.GONE
+
+                emojis.filter { it != clicked }.forEach { other ->
+                    other.animate()
+                        .alpha(0f)
+                        .setDuration(260L)
+                        .withEndAction { other.visibility = View.INVISIBLE }
+                        .start()
+                }
+
+                // 將選中的 emoji 回到容器中間，並放大為正常大小。
+                container.post {
+                    val parentCenterX = container.width / 2f
+                    val clickedCenterX = clicked.x + clicked.width / 2f
+                    val offsetToCenter = parentCenterX - clickedCenterX
+
+                    clicked.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .translationXBy(offsetToCenter)
+                        .alpha(1f)
+                        .setDuration(320L)
+                        .start()
+                }
+            }
+        }
+    }
+
     private fun saveDiaryEntry() {
         val title = titleEditText.text.toString().trim()
         val photoUriString = currentPhotoUri?.toString()
 
-        val q1 = question1TextView.text.toString()
         val c1 = content1EditText.text.toString().trim()
-
-        val q2 = question2TextView.text.toString()
         val c2 = content2EditText.text.toString().trim()
-
-        val q3 = question3TextView.text.toString()
         val c3 = content3EditText.text.toString().trim()
+        val c4 = content4EditText?.text?.toString()?.trim().orEmpty()
 
         // 合併所有問題和回答，使用換行符 (\n) 分隔
         val fullContent = buildString {
             if (c1.isNotEmpty()) {
-                append("$q1\n$c1\n")
+                append("$QUESTION_1\n$c1\n")
             }
             if (c2.isNotEmpty()) {
-                append("$q2\n$c2\n")
+                append("$QUESTION_2\n$c2\n")
             }
             if (c3.isNotEmpty()) {
-                append("$q3\n$c3\n")
+                append("$QUESTION_3\n$c3\n")
+            }
+            if (c4.isNotEmpty()) {
+                append("$QUESTION_4\n$c4\n")
             }
         }.trim() // 移除字串尾部的多餘換行和空格
 
