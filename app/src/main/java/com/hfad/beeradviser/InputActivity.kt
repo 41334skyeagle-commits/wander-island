@@ -10,8 +10,8 @@ import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,33 +32,33 @@ class InputActivity : AppCompatActivity() {
         private const val TAG = "InputActivity"
 
         // 問題文字改為圖片後，儲存時仍保留固定題目文字，方便詳情頁排版。
-        private const val QUESTION_1 = "1. 今天與哪種自然接觸了呢？"
-        private const val QUESTION_2 = "2. 看著綠意，此刻心情如何？"
-        private const val QUESTION_3 = "3. 今天想珍藏的事情是什麼？"
-        private const val QUESTION_4 = "4. 這次耕耘為你帶來什麼改變？"
+        private const val QUESTION_1 = "1. 你覺得今天值得珍藏的事情是什麼？"
+        private const val QUESTION_2 = "2. 你現在感受到自己有什麼情緒呢？"
+        private const val QUESTION_3 = "3. 觀察一下，你有發現自己的小改變嗎？"
+        private const val QUESTION_4 = "4. 明天你想對自己說什麼？"
     }
 
     private lateinit var dbHelper: NoteDatabaseHelper
     private lateinit var dateTextView: TextView
     private lateinit var titleEditText: EditText
     private lateinit var photoUploadArea: ImageView
-    private lateinit var emotionPromptTextView: TextView
-    private lateinit var emotionContainer: View
-    private lateinit var niceEmojiImageView: ImageView
-    private lateinit var okEmojiImageView: ImageView
-    private lateinit var sadEmojiImageView: ImageView
-    private lateinit var guideWord1ImageView: ImageView
-    private lateinit var guideWord2ImageView: ImageView
+    private var emotionPromptTextView: TextView? = null
+    private var emotionContainer: View? = null
+    private var niceEmojiImageView: ImageView? = null
+    private var okEmojiImageView: ImageView? = null
+    private var sadEmojiImageView: ImageView? = null
+    private var guideWord1ImageView: ImageView? = null
+    private var guideWord2ImageView: ImageView? = null
 
-    private lateinit var question1ImageView: ImageView
-    private lateinit var question2ImageView: ImageView
-    private lateinit var question3ImageView: ImageView
-    private lateinit var question4ImageView: ImageView
+    private var question1ImageView: ImageView? = null
+    private var question2ImageView: ImageView? = null
+    private var question3ImageView: ImageView? = null
+    private var question4ImageView: ImageView? = null
 
     private lateinit var content1EditText: EditText
     private lateinit var content2EditText: EditText
     private lateinit var content3EditText: EditText
-    private lateinit var content4EditText: EditText
+    private var content4EditText: EditText? = null
     private lateinit var completeButton: ImageButton
 
     private var latestTmpUri: Uri? = null // 用於保存相機拍照後的臨時 Uri (給 TakePictureLauncher 使用)
@@ -234,7 +234,8 @@ class InputActivity : AppCompatActivity() {
         bindDrawableByName(sadEmojiImageView, "sademoji")
     }
 
-    private fun bindDrawableByName(target: ImageView, drawableName: String) {
+    private fun bindDrawableByName(target: ImageView?, drawableName: String) {
+        target ?: return
         val resId = resources.getIdentifier(drawableName, "drawable", packageName)
         if (resId != 0) {
             target.setImageResource(resId)
@@ -246,10 +247,16 @@ class InputActivity : AppCompatActivity() {
     }
 
     private fun setupEmotionSelector() {
-        val emojis = listOf(niceEmojiImageView, okEmojiImageView, sadEmojiImageView)
+        val prompt = emotionPromptTextView ?: return
+        val container = emotionContainer ?: return
+        val emojis = listOfNotNull(niceEmojiImageView, okEmojiImageView, sadEmojiImageView)
+        if (emojis.size < 3) {
+            Log.w(TAG, "情緒選擇器資源缺失，略過互動初始化。")
+            return
+        }
 
         // 進入頁面預設三顆都縮小，並顯示引導語。
-        emotionPromptTextView.visibility = View.VISIBLE
+        prompt.visibility = View.VISIBLE
         emojis.forEach {
             it.visibility = View.VISIBLE
             it.alpha = 1f
@@ -260,7 +267,7 @@ class InputActivity : AppCompatActivity() {
 
         emojis.forEach { clicked ->
             clicked.setOnClickListener {
-                emotionPromptTextView.visibility = View.GONE
+                prompt.visibility = View.GONE
 
                 emojis.filter { it != clicked }.forEach { other ->
                     other.animate()
@@ -271,8 +278,8 @@ class InputActivity : AppCompatActivity() {
                 }
 
                 // 將選中的 emoji 回到容器中間，並放大為正常大小。
-                emotionContainer.post {
-                    val parentCenterX = emotionContainer.width / 2f
+                container.post {
+                    val parentCenterX = container.width / 2f
                     val clickedCenterX = clicked.x + clicked.width / 2f
                     val offsetToCenter = parentCenterX - clickedCenterX
 
@@ -295,7 +302,7 @@ class InputActivity : AppCompatActivity() {
         val c1 = content1EditText.text.toString().trim()
         val c2 = content2EditText.text.toString().trim()
         val c3 = content3EditText.text.toString().trim()
-        val c4 = content4EditText.text.toString().trim()
+        val c4 = content4EditText?.text?.toString()?.trim().orEmpty()
 
         // 合併所有問題和回答，使用換行符 (\n) 分隔
         val fullContent = buildString {

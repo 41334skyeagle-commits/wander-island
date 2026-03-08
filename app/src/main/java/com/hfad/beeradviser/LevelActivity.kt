@@ -294,10 +294,6 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
             isOneShot = false
         }
 
-        // 設定放大程度（負值代表向外擴張，圖片會變大）
-        // 例如：-12dp。數值越負，圖片在 Button 內看起來越大。
-        val magnificationPx = -(125 * resources.displayMetrics.density).toInt()
-
         for (index in start..end) {
             val frameName = String.format(Locale.US, "%s%03d", prefix, index)
             val frameResId = resources.getIdentifier(frameName, "drawable", packageName)
@@ -305,23 +301,12 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
                 Log.w(TAG, "逐格動畫缺少資源：$frameName，改用 fallback 靜態圖。")
                 return null
             }
-
             val frameDrawable = resources.getDrawable(frameResId, theme)
-
-            // --- 核心放大邏輯：包裝為 InsetDrawable ---
-            // 使用負數的 Insets 會強制讓 Drawable 繪製得比原始尺寸更大
-            val magnifiedDrawable = android.graphics.drawable.InsetDrawable(
-                frameDrawable,
-                magnificationPx, magnificationPx, magnificationPx, magnificationPx
-            )
-
-            animation.addFrame(magnifiedDrawable, frameDurationMs)
+            animation.addFrame(frameDrawable, frameDurationMs)
         }
 
         return animation
     }
-
-
 
     /**
      * 播放開始/暫停時的擴散補間效果。
@@ -340,26 +325,26 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         timerWaveOverlay.setImageResource(resId)
         timerWaveOverlay.visibility = View.VISIBLE
         timerWaveOverlay.alpha = 0.9f
-        timerWaveOverlay.scaleX = 5f
-        timerWaveOverlay.scaleY = 5f
+        timerWaveOverlay.scaleX = 1f
+        timerWaveOverlay.scaleY = 1f
 
         // 以螢幕對角線計算需要的放大倍率，確保覆蓋全畫面。
         val root = findViewById<View>(R.id.level_root_layout)
         val baseSize = maxOf(timerWaveOverlay.width, timerWaveOverlay.height, 1)
         val diagonal = kotlin.math.hypot(root.width.toDouble(), root.height.toDouble()).toFloat()
-        val targetScale = ((diagonal / baseSize) * 1.5f).coerceAtLeast(1.5f)
+        val targetScale = ((diagonal / baseSize) * 1.2f).coerceAtLeast(1.5f)
 
         timerWaveOverlay.animate()
             .scaleX(targetScale)
             .scaleY(targetScale)
             .alpha(0f)
-            .setDuration(700L)
+            .setDuration(900L)
             .setInterpolator(android.view.animation.LinearInterpolator())
             .withEndAction {
                 timerWaveOverlay.visibility = View.GONE
                 timerWaveOverlay.alpha = 0f
-                timerWaveOverlay.scaleX = 800f
-                timerWaveOverlay.scaleY = 800f
+                timerWaveOverlay.scaleX = 1f
+                timerWaveOverlay.scaleY = 1f
             }
             .start()
     }

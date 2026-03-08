@@ -23,27 +23,7 @@
         android:layout_marginBottom="20dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        android:src="@drawable/completebutton"
-        android:contentDescription="完成並儲存日記"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        android:text="2025年10月11日"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        tools:ignore="HardcodedText" />
-    </LinearLayout>
+        android:src="@drawable/completebutton" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -59,19 +39,38 @@
             android:orientation="vertical"
             android:padding="24dp">
 
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                android:text="2025年10月11日"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/emotionPromptTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="請選擇今天的心情"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
             <LinearLayout
                 android:id="@+id/emotionSelectorContainer"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="65dp"
+                android:layout_height="56dp"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/niceEmojiImageView"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
                     android:layout_marginHorizontal="20dp"
                     android:clickable="true"
                     android:contentDescription="好"
@@ -80,8 +79,8 @@
 
                 <ImageView
                     android:id="@+id/okEmojiImageView"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
                     android:layout_marginHorizontal="20dp"
                     android:clickable="true"
                     android:contentDescription="普通"
@@ -90,8 +89,8 @@
 
                 <ImageView
                     android:id="@+id/sadEmojiImageView"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
                     android:layout_marginHorizontal="20dp"
                     android:clickable="true"
                     android:contentDescription="不好"
@@ -127,7 +126,6 @@
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:layout_marginBottom="12dp"
-                android:layout_marginTop="30dp"
                 android:background="@android:color/transparent"
                 android:clickable="true"
                 android:contentDescription="上傳照片區域"
@@ -137,7 +135,7 @@
 
             <ImageView
                 android:id="@+id/guideWord2ImageView"
-                android:layout_width="250dp"
+                android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:adjustViewBounds="true"
@@ -151,8 +149,7 @@
                 android:layout_marginTop="8dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="問題一"
-                android:scaleType="fitStart"
-                android:visibility="gone"/>
+                android:scaleType="fitStart" />
 
             <EditText
                 android:id="@+id/content1EditText"
@@ -164,8 +161,7 @@
                 android:minHeight="88dp"
                 android:padding="8dp"
                 android:textColor="@android:color/black"
-                android:textColorHint="#CCCCCC"
-                android:visibility="gone"/>
+                android:textColorHint="#CCCCCC" />
 
             <ImageView
                 android:id="@+id/question2TextView"
@@ -174,8 +170,7 @@
                 android:layout_marginTop="8dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="問題二"
-                android:scaleType="fitStart"
-                android:visibility="gone"/>
+                android:scaleType="fitStart" />
 
             <EditText
                 android:id="@+id/content2EditText"
@@ -187,8 +182,7 @@
                 android:minHeight="88dp"
                 android:padding="8dp"
                 android:textColor="@android:color/black"
-                android:textColorHint="#CCCCCC"
-                android:visibility="gone"/>
+                android:textColorHint="#CCCCCC" />
 
             <ImageView
                 android:id="@+id/question3TextView"
@@ -197,8 +191,7 @@
                 android:layout_marginTop="8dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="問題三"
-                android:scaleType="fitStart"
-                android:visibility="gone"/>
+                android:scaleType="fitStart" />
 
             <EditText
                 android:id="@+id/content3EditText"
@@ -210,8 +203,7 @@
                 android:minHeight="88dp"
                 android:padding="8dp"
                 android:textColor="@android:color/black"
-                android:textColorHint="#CCCCCC"
-                android:visibility="gone"/>
+                android:textColorHint="#CCCCCC" />
 
             <ImageView
                 android:id="@+id/question4ImageView"
@@ -220,8 +212,7 @@
                 android:layout_marginTop="8dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="問題四"
-                android:scaleType="fitStart"
-                android:visibility="gone"/>
+                android:scaleType="fitStart" />
 
             <EditText
                 android:id="@+id/content4EditText"
@@ -233,8 +224,7 @@
                 android:minHeight="88dp"
                 android:padding="8dp"
                 android:textColor="@android:color/black"
-                android:textColorHint="#CCCCCC"
-                android:visibility="gone"/>
+                android:textColorHint="#CCCCCC" />
 
         </LinearLayout>
     </ScrollView>
