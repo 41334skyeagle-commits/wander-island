@@ -10,8 +10,8 @@ import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,10 +32,10 @@ class InputActivity : AppCompatActivity() {
         private const val TAG = "InputActivity"
 
         // 問題文字改為圖片後，儲存時仍保留固定題目文字，方便詳情頁排版。
-        private const val QUESTION_1 = "1. 你覺得今天值得珍藏的事情是什麼？"
-        private const val QUESTION_2 = "2. 你現在感受到自己有什麼情緒呢？"
-        private const val QUESTION_3 = "3. 觀察一下，你有發現自己的小改變嗎？"
-        private const val QUESTION_4 = "4. 明天你想對自己說什麼？"
+        private const val QUESTION_1 = "1. 今天與哪種自然接觸了呢？"
+        private const val QUESTION_2 = "2. 看著綠意，此刻心情如何？"
+        private const val QUESTION_3 = "3. 今天想珍藏的事情是什麼？"
+        private const val QUESTION_4 = "4. 這次耕耘為你帶來什麼改變？"
     }
 
     private lateinit var dbHelper: NoteDatabaseHelper
