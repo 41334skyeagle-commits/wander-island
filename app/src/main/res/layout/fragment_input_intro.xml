@@ -11,16 +11,27 @@
         android:scaleType="centerCrop"
         android:src="@drawable/noteinputbackground" />
 
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="30dp"
-        android:text="2025年10月11日"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="2dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="2025年10月11日"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,7 +42,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="6dp">
@@ -115,6 +126,7 @@
                 android:id="@+id/guideWord2ImageView"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="10dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="引導語二"
@@ -122,8 +134,8 @@
 
             <ImageView
                 android:id="@+id/upSwipeHintImageView"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_marginBottom="24dp"
                 android:contentDescription="上滑切換下一頁"
                 android:src="@drawable/up_inputpage1" />
