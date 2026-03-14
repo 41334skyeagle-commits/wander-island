@@ -131,8 +131,8 @@
 
             <ImageView
                 android:id="@+id/upSwipeHintImageView"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginBottom="24dp"
                 android:contentDescription="上滑切換下一頁"
                 android:src="@drawable/up_inputpage1" />
