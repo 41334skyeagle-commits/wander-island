@@ -10,6 +10,7 @@ data class Note(
     val content: String,
     val timestamp: Long = System.currentTimeMillis(),
     val photoUri: String? = null,
+    val emotion: String? = null,
     var id: Long = -1
 )
 
@@ -18,13 +19,14 @@ class NoteDatabaseHelper(context: Context) :
 
     companion object {
         private const val DATABASE_NAME = "notes.db"
-        private const val DATABASE_VERSION = 3
+        private const val DATABASE_VERSION = 4
         const val TABLE_NOTES = "notes"
         const val COLUMN_ID = "_id"
         const val COLUMN_TITLE = "title"
         const val COLUMN_CONTENT = "content"
         const val COLUMN_TIMESTAMP = "timestamp"
         const val COLUMN_PHOTO_URI = "photo_uri"
+        const val COLUMN_EMOTION = "emotion"
 
         private const val SQL_CREATE_NOTES =
             "CREATE TABLE $TABLE_NOTES (" +
@@ -32,7 +34,8 @@ class NoteDatabaseHelper(context: Context) :
                     "$COLUMN_TITLE TEXT NOT NULL," +
                     "$COLUMN_CONTENT TEXT NOT NULL," +
                     "$COLUMN_TIMESTAMP INTEGER NOT NULL," +
-                    "$COLUMN_PHOTO_URI TEXT" +
+                    "$COLUMN_PHOTO_URI TEXT," +
+                    "$COLUMN_EMOTION TEXT" +
                     ")"
     }
 
@@ -43,6 +46,9 @@ class NoteDatabaseHelper(context: Context) :
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         if (oldVersion < 3) {
             db.execSQL("ALTER TABLE $TABLE_NOTES ADD COLUMN $COLUMN_PHOTO_URI TEXT DEFAULT NULL")
+        }
+        if (oldVersion < 4) {
+            db.execSQL("ALTER TABLE $TABLE_NOTES ADD COLUMN $COLUMN_EMOTION TEXT DEFAULT NULL")
         }
     }
 
@@ -57,7 +63,8 @@ class NoteDatabaseHelper(context: Context) :
                     COLUMN_TITLE,
                     COLUMN_CONTENT,
                     COLUMN_TIMESTAMP,
-                    COLUMN_PHOTO_URI
+                    COLUMN_PHOTO_URI,
+                    COLUMN_EMOTION
                 ),
                 null, null, null, null, "$COLUMN_TIMESTAMP DESC", null
             )
@@ -70,7 +77,8 @@ class NoteDatabaseHelper(context: Context) :
                         val content = it.getString(it.getColumnIndexOrThrow(COLUMN_CONTENT))
                         val timestamp = it.getLong(it.getColumnIndexOrThrow(COLUMN_TIMESTAMP))
                         val photoUri = it.getString(it.getColumnIndexOrThrow(COLUMN_PHOTO_URI))
-                        notes.add(Note(title, content, timestamp, photoUri, id))
+                        val emotion = it.getString(it.getColumnIndexOrThrow(COLUMN_EMOTION))
+                        notes.add(Note(title, content, timestamp, photoUri, emotion, id))
                     } while (it.moveToNext())
                 }
             }
@@ -86,6 +94,7 @@ class NoteDatabaseHelper(context: Context) :
             put(COLUMN_CONTENT, note.content)
             put(COLUMN_TIMESTAMP, note.timestamp)
             put(COLUMN_PHOTO_URI, note.photoUri)
+            put(COLUMN_EMOTION, note.emotion)
         }
         val newRowId = db.insert(TABLE_NOTES, null, values)
         db.close()
@@ -98,8 +107,15 @@ class NoteDatabaseHelper(context: Context) :
 
         val cursor = db.query(
             TABLE_NOTES,
-            arrayOf(COLUMN_ID, COLUMN_TITLE, COLUMN_CONTENT, COLUMN_TIMESTAMP, COLUMN_PHOTO_URI),
-            "$COLUMN_ID = ?", // 查詢條件
+            arrayOf(
+                COLUMN_ID,
+                COLUMN_TITLE,
+                COLUMN_CONTENT,
+                COLUMN_TIMESTAMP,
+                COLUMN_PHOTO_URI,
+                COLUMN_EMOTION
+            ),
+            "$COLUMN_ID = ?",
             arrayOf(id.toString()),
             null, null, null, null
         )
@@ -111,8 +127,9 @@ class NoteDatabaseHelper(context: Context) :
                 val content = it.getString(it.getColumnIndexOrThrow(COLUMN_CONTENT))
                 val timestamp = it.getLong(it.getColumnIndexOrThrow(COLUMN_TIMESTAMP))
                 val photoUri = it.getString(it.getColumnIndexOrThrow(COLUMN_PHOTO_URI))
+                val emotion = it.getString(it.getColumnIndexOrThrow(COLUMN_EMOTION))
 
-                note = Note(title, content, timestamp, photoUri, noteId)
+                note = Note(title, content, timestamp, photoUri, emotion, noteId)
             }
         }
         db.close()

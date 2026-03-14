@@ -6,73 +6,159 @@
     android:background="@android:color/white"
     tools:context=".NoteDetailActivity">
 
-
     <ImageView
         android:id="@+id/notedetailbackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="日記詳情背景圖片"
         android:scaleType="centerCrop"
-        android:src="@drawable/noteinputbackground"
-        android:contentDescription="日記詳情背景圖片" />
+        android:src="@drawable/noteinputbackground" />
 
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal">
-
-    <TextView
-        android:id="@+id/detailDateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        tools:text="2025年10月11日 星期五" />
-
-    <TextView
-        android:id="@+id/detailTitleTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:paddingVertical="12dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="40dp"
-        tools:text="我與植物" />
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <ImageView
-        android:id="@+id/detailPhotoImageView"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="20dp"
-        android:scaleType="centerCrop"
-        android:background="#DDDDDD"
-        android:contentDescription="日記照片"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/detailDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="2025年10月11日 星期五" />
 
         <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/detailContentTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:lineSpacingExtra="4dp"
-        android:layout_marginTop="10dp"
-        tools:text="今天是個陽光燦爛的日子..." />
-</ScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="24dp">
 
-</LinearLayout>
+                <ImageView
+                    android:id="@+id/detailEmotionImageView"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:contentDescription="心情表情"
+                    android:visibility="gone"
+                    tools:src="@drawable/niceemoji"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/detailTitleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="我與植物" />
+
+                <ImageView
+                    android:id="@+id/detailPhotoImageView"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:background="#DDDDDD"
+                    android:contentDescription="日記照片"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/detailQuestion1ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:contentDescription="問題一"
+                    android:src="@drawable/inputq1" />
+
+                <TextView
+                    android:id="@+id/detailAnswer1TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="14dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    tools:text="今天我最珍藏的是和植物一起散步。" />
+
+                <ImageView
+                    android:id="@+id/detailQuestion2ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="問題二"
+                    android:src="@drawable/inputq2" />
+
+                <TextView
+                    android:id="@+id/detailAnswer2TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="14dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    tools:text="覺得有點累但也很平靜。" />
+
+                <ImageView
+                    android:id="@+id/detailQuestion3ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="問題三"
+                    android:src="@drawable/inputq3" />
+
+                <TextView
+                    android:id="@+id/detailAnswer3TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="14dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    tools:text="我比上週更願意表達感受。" />
+
+                <ImageView
+                    android:id="@+id/detailQuestion4ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="問題四"
+                    android:src="@drawable/inputq4" />
+
+                <TextView
+                    android:id="@+id/detailAnswer4TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="14dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    tools:text="明天也要記得稱讚自己。" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/backButton"
