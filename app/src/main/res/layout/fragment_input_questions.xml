@@ -11,21 +11,39 @@
         android:scaleType="centerCrop"
         android:src="@drawable/noteinputbackground2" />
 
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="30dp"
-        android:text="2025年10月11日"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="2dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="2025年10月11日"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/downSwipeHintImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="5dp"
+            android:contentDescription="下滑返回上一頁"
+            android:src="@drawable/down_inputpage2" />
+
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         android:paddingBottom="120dp">
 
         <LinearLayout
@@ -35,14 +53,6 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="6dp">
-
-            <ImageView
-                android:id="@+id/downSwipeHintImageView"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginBottom="12dp"
-                android:contentDescription="下滑返回上一頁"
-                android:src="@drawable/down_inputpage2" />
 
             <ImageView
                 android:id="@+id/question1TextView"
