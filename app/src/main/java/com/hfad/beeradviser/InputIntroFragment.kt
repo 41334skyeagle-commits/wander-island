@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -48,6 +49,7 @@ class InputIntroFragment : Fragment() {
     private lateinit var titleEditText: EditText
     private lateinit var photoUploadArea: ImageView
     private lateinit var upSwipeHintImageView: ImageView
+    private lateinit var backButton: ImageButton
 
     private var emotionContainer: LinearLayout? = null
     private var niceEmojiImageView: ImageView? = null
@@ -106,6 +108,10 @@ class InputIntroFragment : Fragment() {
         titleEditText = view.findViewById(R.id.titleEditText)
         photoUploadArea = view.findViewById(R.id.photoUploadArea)
         upSwipeHintImageView = view.findViewById(R.id.upSwipeHintImageView)
+        backButton = view.findViewById(R.id.backButton)
+        backButton.setOnClickListener {
+            requireActivity().finish()
+        }
 
         emotionContainer = view.findViewById(R.id.emotionSelectorContainer)
         niceEmojiImageView = view.findViewById(R.id.niceEmojiImageView)
@@ -116,6 +122,7 @@ class InputIntroFragment : Fragment() {
 
         setupUI()
     }
+
 
     private fun setupUI() {
         val date = Date()
