@@ -127,7 +127,8 @@ class InputActivity : AppCompatActivity(), InputIntroFragment.Callback, InputQue
             title = title,
             content = fullContent,
             timestamp = System.currentTimeMillis(),
-            photoUri = photoUriString
+            photoUri = photoUriString,
+            emotion = draftViewModel.emotion?.name
         )
 
         val result = dbHelper.insertNote(note)
