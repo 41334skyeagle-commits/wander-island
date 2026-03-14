@@ -107,25 +107,39 @@ class InputQuestionFragment : Fragment() {
 
     private fun setupSwipeHintTouch() {
         val thresholdPx = SWIPE_THRESHOLD_DP * resources.displayMetrics.density
-        var startY = 0f
+        var touchStartY: Float? = null
 
-        downSwipeHintImageView.setOnTouchListener { _, event ->
+        downSwipeHintImageView.setOnTouchListener { view, event ->
             when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
-                    startY = event.rawY
+                    touchStartY = event.rawY
                     true
                 }
 
                 MotionEvent.ACTION_UP -> {
+                    val startY = touchStartY ?: event.rawY
                     val dy = event.rawY - startY
+                    touchStartY = null
+
                     if (dy > 0 && abs(dy) >= thresholdPx) {
                         (activity as? Callback)?.onSwipeDownToIntroRequested()
+                    } else {
+                        view.performClick()
                     }
                     true
                 }
 
+                MotionEvent.ACTION_CANCEL -> {
+                    touchStartY = null
+                    false
+                }
+
                 else -> false
             }
+        }
+
+        downSwipeHintImageView.setOnClickListener {
+            // 給 performClick() 提供可達性的點擊事件語意，不需額外動作。
         }
     }
 

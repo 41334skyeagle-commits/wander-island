@@ -15,8 +15,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
 import android.widget.EditText
 import android.widget.ImageView
@@ -152,32 +150,46 @@ class InputIntroFragment : Fragment() {
 
     private fun setupSwipeHintTouch() {
         val thresholdPx = SWIPE_THRESHOLD_DP * resources.displayMetrics.density
-        var startY = 0f
+        var touchStartY: Float? = null
 
-        upSwipeHintImageView.setOnTouchListener { _, event ->
+        upSwipeHintImageView.setOnTouchListener { view, event ->
             when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
-                    startY = event.rawY
+                    touchStartY = event.rawY
                     true
                 }
 
                 MotionEvent.ACTION_UP -> {
+                    val startY = touchStartY ?: event.rawY
                     val dy = event.rawY - startY
+                    touchStartY = null
+
                     if (dy < 0 && abs(dy) >= thresholdPx) {
                         (activity as? Callback)?.onSwipeUpToQuestionsRequested()
+                    } else {
+                        view.performClick()
                     }
                     true
                 }
 
+                MotionEvent.ACTION_CANCEL -> {
+                    touchStartY = null
+                    false
+                }
+
                 else -> false
             }
+        }
+
+        upSwipeHintImageView.setOnClickListener {
+            // 給 performClick() 提供可達性的點擊事件語意，不需額外動作。
         }
     }
 
     private fun startFloatingAnimation(view: View) {
         ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, 0f, -12f, 0f).apply {
             duration = 1400L
-            repeatCount = Animation.INFINITE
+            repeatCount = ObjectAnimator.INFINITE
             interpolator = LinearInterpolator()
             start()
         }
