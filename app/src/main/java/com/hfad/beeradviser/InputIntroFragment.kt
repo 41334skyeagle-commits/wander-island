@@ -49,7 +49,6 @@ class InputIntroFragment : Fragment() {
     private lateinit var photoUploadArea: ImageView
     private lateinit var upSwipeHintImageView: ImageView
 
-    private var emotionPromptTextView: TextView? = null
     private var emotionContainer: LinearLayout? = null
     private var niceEmojiImageView: ImageView? = null
     private var okEmojiImageView: ImageView? = null
@@ -108,7 +107,6 @@ class InputIntroFragment : Fragment() {
         photoUploadArea = view.findViewById(R.id.photoUploadArea)
         upSwipeHintImageView = view.findViewById(R.id.upSwipeHintImageView)
 
-        emotionPromptTextView = view.findViewById(R.id.emotionPromptTextView)
         emotionContainer = view.findViewById(R.id.emotionSelectorContainer)
         niceEmojiImageView = view.findViewById(R.id.niceEmojiImageView)
         okEmojiImageView = view.findViewById(R.id.okEmojiImageView)
@@ -217,7 +215,6 @@ class InputIntroFragment : Fragment() {
     }
 
     private fun setupEmotionSelector() {
-        val prompt = emotionPromptTextView ?: return
         val container = emotionContainer ?: return
         val emojis = listOfNotNull(niceEmojiImageView, okEmojiImageView, sadEmojiImageView)
         if (emojis.size < 3) {
@@ -225,13 +222,18 @@ class InputIntroFragment : Fragment() {
             return
         }
 
-        prompt.visibility = View.VISIBLE
         emojis.forEach {
             it.visibility = View.VISIBLE
             it.alpha = 1f
             it.scaleX = 0.72f
             it.scaleY = 0.72f
             it.translationX = 0f
+            it.isClickable = true
+        }
+
+        if (draftViewModel.emotion != null) {
+            emojis.forEach { it.isClickable = false }
+            return
         }
 
         val mapping = mapOf(
@@ -242,34 +244,35 @@ class InputIntroFragment : Fragment() {
 
         emojis.forEach { clicked ->
             clicked.setOnClickListener {
-                prompt.visibility = View.GONE
+                if (draftViewModel.emotion != null) return@setOnClickListener
                 draftViewModel.emotion = mapping[clicked]
+                emojis.forEach { it.isClickable = false }
 
                 emojis.filter { it != clicked }.forEach { other ->
                     other.animate()
-                        .alpha(0.35f)
+                        .alpha(0f)
                         .scaleX(0.72f)
                         .scaleY(0.72f)
                         .translationX(0f)
-                        .setDuration(220L)
+                        .setDuration(300L)
                         .start()
                 }
 
                 clicked.translationX = 0f
 
-                container.post {
+                container.postDelayed({
                     val parentCenterX = container.width / 2f
                     val clickedCenterX = clicked.left + clicked.width / 2f
                     val offsetToCenter = parentCenterX - clickedCenterX
 
                     clicked.animate()
-                        .scaleX(1f)
-                        .scaleY(1f)
+                        .scaleX(1.2f)
+                        .scaleY(1.2f)
                         .translationX(offsetToCenter)
                         .alpha(1f)
-                        .setDuration(260L)
+                        .setDuration(300L)
                         .start()
-                }
+                }, 300L)
             }
         }
     }
@@ -282,11 +285,10 @@ class InputIntroFragment : Fragment() {
             InputDraftViewModel.Emotion.SAD -> sadEmojiImageView
         } ?: return
 
-        emotionPromptTextView?.visibility = View.GONE
-
         val all = listOfNotNull(niceEmojiImageView, okEmojiImageView, sadEmojiImageView)
+        all.forEach { it.isClickable = false }
         all.filter { it != selectedView }.forEach {
-            it.alpha = 0.35f
+            it.alpha = 0f
             it.scaleX = 0.72f
             it.scaleY = 0.72f
             it.translationX = 0f
@@ -298,8 +300,8 @@ class InputIntroFragment : Fragment() {
             val clickedCenterX = selectedView.x + selectedView.width / 2f
             val offsetToCenter = parentCenterX - clickedCenterX
             selectedView.translationX = offsetToCenter
-            selectedView.scaleX = 1f
-            selectedView.scaleY = 1f
+            selectedView.scaleX = 1.2f
+            selectedView.scaleY = 1.2f
             selectedView.alpha = 1f
         }
     }
