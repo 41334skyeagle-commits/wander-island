@@ -325,8 +325,8 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         timerWaveOverlay.setImageResource(resId)
         timerWaveOverlay.visibility = View.VISIBLE
         timerWaveOverlay.alpha = 0.9f
-        timerWaveOverlay.scaleX = 1f
-        timerWaveOverlay.scaleY = 1f
+        timerWaveOverlay.scaleX = 4f
+        timerWaveOverlay.scaleY = 4f
 
         // 以螢幕對角線計算需要的放大倍率，確保覆蓋全畫面。
         val root = findViewById<View>(R.id.level_root_layout)
