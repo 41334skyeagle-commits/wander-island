@@ -50,7 +50,7 @@ class InputIntroFragment : Fragment() {
     private lateinit var upSwipeHintImageView: ImageView
 
     private var emotionPromptTextView: TextView? = null
-    private var emotionContainer: View? = null
+    private var emotionContainer: LinearLayout? = null
     private var niceEmojiImageView: ImageView? = null
     private var okEmojiImageView: ImageView? = null
     private var sadEmojiImageView: ImageView? = null
@@ -246,18 +246,26 @@ class InputIntroFragment : Fragment() {
                 draftViewModel.emotion = mapping[clicked]
 
                 emojis.filter { it != clicked }.forEach { other ->
-                    other.animate().alpha(0.35f).scaleX(0.72f).scaleY(0.72f).setDuration(220L).start()
+                    other.animate()
+                        .alpha(0.35f)
+                        .scaleX(0.72f)
+                        .scaleY(0.72f)
+                        .translationX(0f)
+                        .setDuration(220L)
+                        .start()
                 }
+
+                clicked.translationX = 0f
 
                 container.post {
                     val parentCenterX = container.width / 2f
-                    val clickedCenterX = clicked.x + clicked.width / 2f
+                    val clickedCenterX = clicked.left + clicked.width / 2f
                     val offsetToCenter = parentCenterX - clickedCenterX
 
                     clicked.animate()
                         .scaleX(1f)
                         .scaleY(1f)
-                        .translationXBy(offsetToCenter)
+                        .translationX(offsetToCenter)
                         .alpha(1f)
                         .setDuration(260L)
                         .start()
@@ -284,7 +292,7 @@ class InputIntroFragment : Fragment() {
             it.translationX = 0f
         }
 
-        val container = emotionContainer as? LinearLayout ?: return
+        val container = emotionContainer ?: return
         container.post {
             val parentCenterX = container.width / 2f
             val clickedCenterX = selectedView.x + selectedView.width / 2f
