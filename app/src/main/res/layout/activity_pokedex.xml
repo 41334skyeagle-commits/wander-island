@@ -39,10 +39,10 @@
 
     <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="25dp"
         android:background="@android:color/transparent"
         android:contentDescription="返回上一頁按鈕"
         android:scaleType="fitCenter"

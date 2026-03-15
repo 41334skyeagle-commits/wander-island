@@ -288,7 +288,13 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
      * 動態組裝逐格動畫，避免在 XML animation-list 內綁死資源，
      * 讓你只要把對應檔名的 PNG 匯入即可直接生效。
      */
-    private fun buildFrameAnimation(prefix: String, start: Int, end: Int, fps: Int): android.graphics.drawable.AnimationDrawable? {
+    private fun buildFrameAnimation(
+        prefix: String,
+        start: Int,
+        end: Int,
+        fps: Int,
+        scaleInset: Int = 250
+    ): android.graphics.drawable.AnimationDrawable? {
         val frameDurationMs = (1000f / fps).toInt().coerceAtLeast(1)
         val animation = android.graphics.drawable.AnimationDrawable().apply {
             isOneShot = false
@@ -297,12 +303,23 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         for (index in start..end) {
             val frameName = String.format(Locale.US, "%s%03d", prefix, index)
             val frameResId = resources.getIdentifier(frameName, "drawable", packageName)
+
             if (frameResId == 0) {
                 Log.w(TAG, "逐格動畫缺少資源：$frameName，改用 fallback 靜態圖。")
                 return null
             }
+
             val frameDrawable = resources.getDrawable(frameResId, theme)
-            animation.addFrame(frameDrawable, frameDurationMs)
+
+            // --- 修改部分：套用負向 Inset ---
+            val finalDrawable = if (scaleInset != 0) {
+                // 傳入負值會使 Drawable 向外擴張，達成放大效果
+                // 四個參數分別為：left, top, right, bottom
+                android.graphics.drawable.InsetDrawable(frameDrawable, -scaleInset)
+            } else {
+                frameDrawable
+            }
+            animation.addFrame(finalDrawable, frameDurationMs)
         }
 
         return animation

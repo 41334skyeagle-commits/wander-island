@@ -232,8 +232,8 @@ class InputIntroFragment : Fragment() {
         emojis.forEach {
             it.visibility = View.VISIBLE
             it.alpha = 1f
-            it.scaleX = 0.72f
-            it.scaleY = 0.72f
+            it.scaleX = 0.85f
+            it.scaleY = 0.85f
             it.translationX = 0f
             it.isClickable = true
         }
@@ -273,8 +273,8 @@ class InputIntroFragment : Fragment() {
                     val offsetToCenter = parentCenterX - clickedCenterX
 
                     clicked.animate()
-                        .scaleX(1.2f)
-                        .scaleY(1.2f)
+                        .scaleX(1.5f)
+                        .scaleY(1.5f)
                         .translationX(offsetToCenter)
                         .alpha(1f)
                         .setDuration(300L)
