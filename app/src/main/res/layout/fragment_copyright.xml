@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:background="#66607D8B">
 
     <ImageView
         android:id="@+id/copyrightBackground"
@@ -17,15 +18,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/copyrightDescription"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
         android:contentDescription="@null"
         android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         android:src="@drawable/copyright_page_description"
         app:layout_constraintBottom_toTopOf="@id/copyrightCloseButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,9 +39,9 @@
 
     <ImageView
         android:id="@+id/copyrightCloseButton"
-        android:layout_width="150dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="48dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="185dp"
         android:clickable="true"
         android:contentDescription="@string/copyright_close_description"
         android:focusable="true"

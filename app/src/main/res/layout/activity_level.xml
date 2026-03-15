@@ -17,15 +17,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-        <ImageView
-            android:id="@+id/plant_image_bubble"
-            android:layout_width="560dp"
-            android:layout_height="560dp"
-            android:layout_marginTop="35dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/plant_image_bubble" />
+
     </FrameLayout>
 
+    <ImageView
+        android:id="@+id/plant_image_bubble"
+        android:layout_width="560dp"
+        android:layout_height="560dp"
+        android:layout_marginTop="35dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/plant_image_bubble"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
