@@ -26,6 +26,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.hfad.beeradviser.data.Plant
 import com.hfad.beeradviser.data.PlantStatus
+import com.hfad.beeradviser.ui.CopyrightFragment
 import com.hfad.beeradviser.ui.GuideToIslandFragment
 import com.hfad.beeradviser.ui.PlantCompletionCardFragment
 import com.hfad.beeradviser.ui.PlantPokedexViewModel
@@ -150,6 +151,14 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         settingsButton.setOnClickListener {
             val settingsFragment = SettingsFragment()
             settingsFragment.show(supportFragmentManager, "settings_dialog_level")
+        }
+
+        imageButton6.setOnClickListener {
+            if (supportFragmentManager.findFragmentByTag("COPYRIGHT_DIALOG") == null) {
+                supportFragmentManager.beginTransaction()
+                    .add(android.R.id.content, CopyrightFragment(), "COPYRIGHT_DIALOG")
+                    .commit()
+            }
         }
 
         // 為 imageButton8 設定點擊監聽器，點擊後導航回 MainActivity

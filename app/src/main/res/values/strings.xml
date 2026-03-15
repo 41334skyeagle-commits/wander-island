@@ -10,4 +10,5 @@
     <string name="button7_description">能量長條</string>
     <string name="button8_description">返回島嶼</string>
     <string name="Team_logo_1_description">白色logo</string>
+    <string name="copyright_close_description">關閉版權頁</string>
 </resources>
