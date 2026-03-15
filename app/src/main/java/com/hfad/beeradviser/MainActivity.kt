@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
+import com.hfad.beeradviser.ui.CopyrightFragment
 import com.hfad.beeradviser.ui.MainViewModel
 import com.hfad.beeradviser.ui.MainViewModelFactory
 
@@ -81,6 +82,14 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
         }
         findViewById<ImageButton>(R.id.imageButton1).setOnClickListener {
             SettingsFragment().show(supportFragmentManager, "settings_dialog_main")
+        }
+
+        findViewById<ImageButton>(R.id.imageButton6).setOnClickListener {
+            if (supportFragmentManager.findFragmentByTag("COPYRIGHT_DIALOG") == null) {
+                supportFragmentManager.beginTransaction()
+                    .add(android.R.id.content, CopyrightFragment(), "COPYRIGHT_DIALOG")
+                    .commit()
+            }
         }
     }
 
