@@ -14,22 +14,8 @@
 
     <string name="quiz_background_description">測驗背景</string>
     <string name="quiz_result_description">測驗結果圖</string>
-    <string name="quiz_start_title">心情小測驗</string>
-    <string name="quiz_start_subtitle">準備好就開始吧！</string>
-    <string name="quiz_start_button">開始測驗</string>
-    <string name="quiz_question1_title">第一題</string>
-    <string name="quiz_question2_title">第二題</string>
-    <string name="quiz_question_weather">今天天氣如何？</string>
-    <string name="quiz_question_mood">今天心情如何？</string>
-    <string name="quiz_option_sunny">sunny</string>
-    <string name="quiz_option_cloud">cloud</string>
-    <string name="quiz_option_rain">rain</string>
-    <string name="quiz_option_nice">nice</string>
-    <string name="quiz_option_ok">ok</string>
-    <string name="quiz_option_sad">sad</string>
-    <string name="quiz_loading_title">結果計算中...</string>
-    <string name="quiz_loading_subtitle">請稍候</string>
-    <string name="quiz_result_title">測驗結果</string>
-    <string name="quiz_result_subtitle">weather=%1$s, mood=%2$s</string>
-    <string name="quiz_restart_button">再玩一次</string>
+    <string name="quiz_start_button_description">開始測驗</string>
+    <string name="quiz_option_button1_description">選項按鈕1</string>
+    <string name="quiz_option_button2_description">選項按鈕2</string>
+    <string name="quiz_option_button3_description">選項按鈕3</string>
 </resources>

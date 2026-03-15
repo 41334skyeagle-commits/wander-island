@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class QuizActivity : AppCompatActivity() {
@@ -16,12 +15,11 @@ class QuizActivity : AppCompatActivity() {
     private enum class Mood { NICE, OK, SAD }
 
     private lateinit var quizBackground: ImageView
-    private lateinit var titleTextView: TextView
-    private lateinit var questionTextView: TextView
-    private lateinit var optionButton1: Button
-    private lateinit var optionButton2: Button
-    private lateinit var optionButton3: Button
-    private lateinit var primaryButton: Button
+    private lateinit var startButton: ImageButton
+    private lateinit var optionButton1: ImageButton
+    private lateinit var optionButton2: ImageButton
+    private lateinit var optionButton3: ImageButton
+    private lateinit var optionsContainer: View
     private lateinit var resultImageView: ImageView
     private lateinit var loadingProgress: ProgressBar
 
@@ -35,12 +33,11 @@ class QuizActivity : AppCompatActivity() {
         setContentView(R.layout.activity_quiz)
 
         quizBackground = findViewById(R.id.quizBackground)
-        titleTextView = findViewById(R.id.titleTextView)
-        questionTextView = findViewById(R.id.questionTextView)
+        startButton = findViewById(R.id.startButton)
         optionButton1 = findViewById(R.id.optionButton1)
         optionButton2 = findViewById(R.id.optionButton2)
         optionButton3 = findViewById(R.id.optionButton3)
-        primaryButton = findViewById(R.id.primaryButton)
+        optionsContainer = findViewById(R.id.optionsContainer)
         resultImageView = findViewById(R.id.resultImageView)
         loadingProgress = findViewById(R.id.loadingProgress)
 
@@ -51,72 +48,81 @@ class QuizActivity : AppCompatActivity() {
         selectedWeather = null
         selectedMood = null
 
+        // TODO: 改成「開始頁背景.png」
         quizBackground.setImageResource(R.drawable.island_1_bg)
-        titleTextView.text = getString(R.string.quiz_start_title)
-        questionTextView.text = getString(R.string.quiz_start_subtitle)
 
-        setOptionsVisible(false)
+        optionsContainer.visibility = View.GONE
         loadingProgress.visibility = View.GONE
         resultImageView.visibility = View.GONE
 
-        primaryButton.visibility = View.VISIBLE
-        primaryButton.text = getString(R.string.quiz_start_button)
-        primaryButton.setOnClickListener { showWeatherQuestionPage() }
+        startButton.visibility = View.VISIBLE
+        // TODO: 改成「開始測驗按鈕.png」
+        startButton.setImageResource(R.drawable.ic_button5)
+        startButton.setOnClickListener { showWeatherQuestionPage() }
     }
 
     private fun showWeatherQuestionPage() {
+        // TODO: 改成「第一題背景.png」
         quizBackground.setImageResource(R.drawable.level_2_background)
-        titleTextView.text = getString(R.string.quiz_question1_title)
-        questionTextView.text = getString(R.string.quiz_question_weather)
 
+        startButton.visibility = View.GONE
         loadingProgress.visibility = View.GONE
         resultImageView.visibility = View.GONE
-        primaryButton.visibility = View.GONE
+        optionsContainer.visibility = View.VISIBLE
 
-        setupOptions(
-            getString(R.string.quiz_option_sunny),
-            getString(R.string.quiz_option_cloud),
-            getString(R.string.quiz_option_rain)
-        ) { index ->
-            selectedWeather = when (index) {
-                0 -> Weather.SUNNY
-                1 -> Weather.CLOUD
-                else -> Weather.RAIN
-            }
+        // TODO: 改成 sunny/cloud/rain 的按鈕圖
+        optionButton1.setImageResource(R.drawable.ic_button1)
+        optionButton2.setImageResource(R.drawable.ic_button2)
+        optionButton3.setImageResource(R.drawable.ic_button3)
+
+        optionButton1.setOnClickListener {
+            selectedWeather = Weather.SUNNY
+            showMoodQuestionPage()
+        }
+        optionButton2.setOnClickListener {
+            selectedWeather = Weather.CLOUD
+            showMoodQuestionPage()
+        }
+        optionButton3.setOnClickListener {
+            selectedWeather = Weather.RAIN
             showMoodQuestionPage()
         }
     }
 
     private fun showMoodQuestionPage() {
+        // TODO: 改成「第二題背景.png」
         quizBackground.setImageResource(R.drawable.level_4_background)
-        titleTextView.text = getString(R.string.quiz_question2_title)
-        questionTextView.text = getString(R.string.quiz_question_mood)
 
+        startButton.visibility = View.GONE
         loadingProgress.visibility = View.GONE
         resultImageView.visibility = View.GONE
-        primaryButton.visibility = View.GONE
+        optionsContainer.visibility = View.VISIBLE
 
-        setupOptions(
-            getString(R.string.quiz_option_nice),
-            getString(R.string.quiz_option_ok),
-            getString(R.string.quiz_option_sad)
-        ) { index ->
-            selectedMood = when (index) {
-                0 -> Mood.NICE
-                1 -> Mood.OK
-                else -> Mood.SAD
-            }
+        // TODO: 改成 nice/ok/sad 的按鈕圖
+        optionButton1.setImageResource(R.drawable.ic_button1)
+        optionButton2.setImageResource(R.drawable.ic_button2)
+        optionButton3.setImageResource(R.drawable.ic_button3)
+
+        optionButton1.setOnClickListener {
+            selectedMood = Mood.NICE
+            showLoadingPage()
+        }
+        optionButton2.setOnClickListener {
+            selectedMood = Mood.OK
+            showLoadingPage()
+        }
+        optionButton3.setOnClickListener {
+            selectedMood = Mood.SAD
             showLoadingPage()
         }
     }
 
     private fun showLoadingPage() {
+        // TODO: 改成「過渡頁面.png」
         quizBackground.setImageResource(R.drawable.level_3_background)
-        titleTextView.text = getString(R.string.quiz_loading_title)
-        questionTextView.text = getString(R.string.quiz_loading_subtitle)
 
-        setOptionsVisible(false)
-        primaryButton.visibility = View.GONE
+        startButton.visibility = View.GONE
+        optionsContainer.visibility = View.GONE
         resultImageView.visibility = View.GONE
         loadingProgress.visibility = View.VISIBLE
 
@@ -130,19 +136,16 @@ class QuizActivity : AppCompatActivity() {
         val mood = selectedMood ?: Mood.OK
         val resultDrawable = resultDrawableFor(weather, mood)
 
+        // TODO: 改成結果頁背景（若需要）
         quizBackground.setImageResource(R.drawable.island_5_bg)
-        titleTextView.text = getString(R.string.quiz_result_title)
-        questionTextView.text = getString(R.string.quiz_result_subtitle, weather.name, mood.name)
 
         loadingProgress.visibility = View.GONE
-        setOptionsVisible(false)
+        startButton.visibility = View.GONE
+        optionsContainer.visibility = View.GONE
 
         resultImageView.visibility = View.VISIBLE
+        // TODO: 以最終「結果圖片.png」資源替換 mapping
         resultImageView.setImageResource(resultDrawable)
-
-        primaryButton.visibility = View.VISIBLE
-        primaryButton.text = getString(R.string.quiz_restart_button)
-        primaryButton.setOnClickListener { showStartPage() }
     }
 
     private fun resultDrawableFor(weather: Weather, mood: Mood): Int {
@@ -165,29 +168,6 @@ class QuizActivity : AppCompatActivity() {
                 Mood.SAD -> R.drawable.level_5_icon
             }
         }
-    }
-
-    private fun setupOptions(
-        option1: String,
-        option2: String,
-        option3: String,
-        onSelected: (Int) -> Unit
-    ) {
-        setOptionsVisible(true)
-        optionButton1.text = option1
-        optionButton2.text = option2
-        optionButton3.text = option3
-
-        optionButton1.setOnClickListener { onSelected(0) }
-        optionButton2.setOnClickListener { onSelected(1) }
-        optionButton3.setOnClickListener { onSelected(2) }
-    }
-
-    private fun setOptionsVisible(isVisible: Boolean) {
-        val visibility = if (isVisible) View.VISIBLE else View.GONE
-        optionButton1.visibility = visibility
-        optionButton2.visibility = visibility
-        optionButton3.visibility = visibility
     }
 
     override fun onDestroy() {
