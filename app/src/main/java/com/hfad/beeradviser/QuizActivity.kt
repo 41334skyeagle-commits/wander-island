@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.random.Random
 
 class QuizActivity : AppCompatActivity() {
 
@@ -144,30 +145,31 @@ class QuizActivity : AppCompatActivity() {
         optionsContainer.visibility = View.GONE
 
         resultImageView.visibility = View.VISIBLE
-        // TODO: 以最終「結果圖片.png」資源替換 mapping
         resultImageView.setImageResource(resultDrawable)
     }
 
     private fun resultDrawableFor(weather: Weather, mood: Mood): Int {
-        return when (weather) {
-            Weather.SUNNY -> when (mood) {
-                Mood.NICE -> R.drawable.level_1_icon
-                Mood.OK -> R.drawable.level_2_icon
-                Mood.SAD -> R.drawable.level_3_icon
-            }
-
-            Weather.CLOUD -> when (mood) {
-                Mood.NICE -> R.drawable.level_2_icon
-                Mood.OK -> R.drawable.level_3_icon
-                Mood.SAD -> R.drawable.level_4_icon
-            }
-
-            Weather.RAIN -> when (mood) {
-                Mood.NICE -> R.drawable.level_3_icon
-                Mood.OK -> R.drawable.level_4_icon
-                Mood.SAD -> R.drawable.level_5_icon
-            }
+        val weatherPrefix = when (weather) {
+            Weather.SUNNY -> "sunny"
+            Weather.CLOUD -> "cloud"
+            Weather.RAIN -> "rain"
         }
+        val moodPrefix = when (mood) {
+            Mood.NICE -> "nice"
+            Mood.OK -> "ok"
+            Mood.SAD -> "sad"
+        }
+
+        val maxPlan = if (weather == Weather.SUNNY) 5 else 4
+        val candidateNames = (1..maxPlan).map { index ->
+            "${weatherPrefix}${moodPrefix}plan${index}"
+        }.shuffled(Random(System.currentTimeMillis()))
+
+        val resolvedResId = candidateNames.firstNotNullOfOrNull { resName ->
+            resources.getIdentifier(resName, "drawable", packageName).takeIf { it != 0 }
+        }
+
+        return resolvedResId ?: R.drawable.ic_default_plant_placeholder
     }
 
     override fun onDestroy() {
