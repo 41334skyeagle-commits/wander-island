@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/quizBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/quiz_background_description"
+        android:scaleType="centerCrop" />
+
+    <ImageButton
+        android:id="@+id/startButton"
+        android:layout_width="220dp"
+        android:layout_height="90dp"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/quiz_start_button_description"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button5" />
+
+    <LinearLayout
+        android:id="@+id/optionsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/optionButton1"
+            android:layout_width="220dp"
+            android:layout_height="90dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/quiz_option_button1_description"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_button1" />
+
+        <ImageButton
+            android:id="@+id/optionButton2"
+            android:layout_width="220dp"
+            android:layout_height="90dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/quiz_option_button2_description"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_button2" />
+
+        <ImageButton
+            android:id="@+id/optionButton3"
+            android:layout_width="220dp"
+            android:layout_height="90dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/quiz_option_button3_description"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_button3" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loadingProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/resultImageView"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/quiz_result_description"
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
+
+</FrameLayout>

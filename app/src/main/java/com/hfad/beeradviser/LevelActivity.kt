@@ -50,6 +50,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
     private lateinit var imageButton4: ImageButton
     private lateinit var gifBadgeImageView: ImageView
     private lateinit var settingsButton: ImageButton
+    private lateinit var quizButton: ImageButton
     private lateinit var imageButton8: ImageButton
     private lateinit var plantProgressBar: ProgressBar
     private lateinit var viewModel: PlantPokedexViewModel
@@ -110,6 +111,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         gifBadgeImageView = findViewById(R.id.gif_badge_image)
         resetEnergyButton = findViewById(R.id.resetEnergyButton)
         settingsButton = findViewById(R.id.imageButton1)
+        quizButton = findViewById(R.id.imageButton5)
         imageButton8 = findViewById(R.id.imageButton8)
         plantProgressBar = findViewById(R.id.plantProgressBar)
         plantImageView = findViewById(R.id.plant_image_view)
@@ -151,6 +153,10 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         settingsButton.setOnClickListener {
             val settingsFragment = SettingsFragment()
             settingsFragment.show(supportFragmentManager, "settings_dialog_level")
+        }
+
+        quizButton.setOnClickListener {
+            startActivity(Intent(this, QuizActivity::class.java))
         }
 
         imageButton6.setOnClickListener {
