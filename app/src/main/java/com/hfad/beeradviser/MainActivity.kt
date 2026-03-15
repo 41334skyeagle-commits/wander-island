@@ -83,6 +83,9 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
         findViewById<ImageButton>(R.id.imageButton1).setOnClickListener {
             SettingsFragment().show(supportFragmentManager, "settings_dialog_main")
         }
+        findViewById<ImageButton>(R.id.imageButton5).setOnClickListener {
+            startActivity(Intent(this, QuizActivity::class.java))
+        }
 
         findViewById<ImageButton>(R.id.imageButton6).setOnClickListener {
             if (supportFragmentManager.findFragmentByTag("COPYRIGHT_DIALOG") == null) {
