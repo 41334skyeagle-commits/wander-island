@@ -45,6 +45,7 @@
         <activity android:name=".ActivityB" />
         <activity android:name=".InputActivity" />
         <activity android:name=".LevelActivity" />
+        <activity android:name=".QuizActivity" />
         <activity android:name=".PokedexActivity" />
         <activity android:name=".NoteDetailActivity" />
 
