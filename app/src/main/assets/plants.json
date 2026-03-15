@@ -8,7 +8,7 @@
     "stageThreeImageFileName": "plant_1_1_s3",
     "islandId": 1,
     "plantIndex": 1,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "1_2",
@@ -19,7 +19,7 @@
     "stageThreeImageFileName": "plant_1_2_s3",
     "islandId": 1,
     "plantIndex": 2,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "1_3",
@@ -30,7 +30,7 @@
     "stageThreeImageFileName": "plant_1_3_s3",
     "islandId": 1,
     "plantIndex": 3,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "2_1",
@@ -41,7 +41,7 @@
     "stageThreeImageFileName": "plant_2_1_s3",
     "islandId": 2,
     "plantIndex": 1,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "2_2",
@@ -52,7 +52,7 @@
     "stageThreeImageFileName": "plant_2_2_s3",
     "islandId": 2,
     "plantIndex": 2,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "2_3",
@@ -63,7 +63,7 @@
     "stageThreeImageFileName": "plant_2_3_s3",
     "islandId": 2,
     "plantIndex": 3,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "3_1",
@@ -74,7 +74,7 @@
     "stageThreeImageFileName": "plant_3_1_s3",
     "islandId": 3,
     "plantIndex": 1,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "3_2",
@@ -85,7 +85,7 @@
     "stageThreeImageFileName": "plant_3_2_s3",
     "islandId": 3,
     "plantIndex": 2,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "3_3",
@@ -96,7 +96,7 @@
     "stageThreeImageFileName": "plant_3_3_s3",
     "islandId": 3,
     "plantIndex": 3,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "4_1",
@@ -107,7 +107,7 @@
     "stageThreeImageFileName": "plant_4_1_s3",
     "islandId": 4,
     "plantIndex": 1,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "4_2",
@@ -118,7 +118,7 @@
     "stageThreeImageFileName": "plant_4_2_s3",
     "islandId": 4,
     "plantIndex": 2,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "4_3",
@@ -129,7 +129,7 @@
     "stageThreeImageFileName": "plant_4_3_s3",
     "islandId": 4,
     "plantIndex": 3,
-    "totalEnergyRequired": 30
+    "totalEnergyRequired": 2
   },
   {
     "id": "5_1",
