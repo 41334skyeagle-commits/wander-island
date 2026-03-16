@@ -120,7 +120,7 @@ class QuizActivity : AppCompatActivity() {
 
     private fun showLoadingPage() {
         // TODO: 改成「過渡頁面.png」
-        quizBackground.setImageResource(R.drawable.level_3_background)
+        quizBackground.setImageResource(R.drawable.quiz_loadingpage)
 
         startButton.visibility = View.GONE
         optionsContainer.visibility = View.GONE
@@ -138,19 +138,18 @@ class QuizActivity : AppCompatActivity() {
         val resultDrawable = resultDrawableFor(weather, mood)
 
         // TODO: 改成結果頁背景（若需要）
-        quizBackground.setImageResource(R.drawable.island_5_bg)
+        quizBackground.setImageResource(R.drawable.noteimageviewbackground)
 
         loadingProgress.visibility = View.GONE
         startButton.visibility = View.GONE
         optionsContainer.visibility = View.GONE
-
         resultImageView.visibility = View.VISIBLE
         resultImageView.setImageResource(resultDrawable)
     }
 
     private fun resultDrawableFor(weather: Weather, mood: Mood): Int {
         val weatherPrefix = when (weather) {
-            Weather.SUNNY -> "sunny"
+            Weather.SUNNY -> "sun"
             Weather.CLOUD -> "cloud"
             Weather.RAIN -> "rain"
         }
