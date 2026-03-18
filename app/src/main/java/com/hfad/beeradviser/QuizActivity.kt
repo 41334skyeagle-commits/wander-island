@@ -21,6 +21,7 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var optionButton2: ImageButton
     private lateinit var optionButton3: ImageButton
     private lateinit var optionsContainer: View
+    private lateinit var resultCardContainer: View
     private lateinit var resultImageView: ImageView
     private lateinit var loadingProgress: ProgressBar
 
@@ -39,6 +40,7 @@ class QuizActivity : AppCompatActivity() {
         optionButton2 = findViewById(R.id.optionButton2)
         optionButton3 = findViewById(R.id.optionButton3)
         optionsContainer = findViewById(R.id.optionsContainer)
+        resultCardContainer = findViewById(R.id.resultCardContainer)
         resultImageView = findViewById(R.id.resultImageView)
         loadingProgress = findViewById(R.id.loadingProgress)
 
@@ -53,7 +55,7 @@ class QuizActivity : AppCompatActivity() {
 
         optionsContainer.visibility = View.GONE
         loadingProgress.visibility = View.GONE
-        resultImageView.visibility = View.GONE
+        resultCardContainer.visibility = View.GONE
 
         startButton.visibility = View.VISIBLE
         startButton.setImageResource(R.drawable.start_quiz)
@@ -66,7 +68,7 @@ class QuizActivity : AppCompatActivity() {
 
         startButton.visibility = View.GONE
         loadingProgress.visibility = View.GONE
-        resultImageView.visibility = View.GONE
+        resultCardContainer.visibility = View.GONE
         optionsContainer.visibility = View.VISIBLE
 
         optionButton1.setImageResource(R.drawable.sun_option)
@@ -93,7 +95,7 @@ class QuizActivity : AppCompatActivity() {
 
         startButton.visibility = View.GONE
         loadingProgress.visibility = View.GONE
-        resultImageView.visibility = View.GONE
+        resultCardContainer.visibility = View.GONE
         optionsContainer.visibility = View.VISIBLE
 
 
@@ -120,7 +122,7 @@ class QuizActivity : AppCompatActivity() {
 
         startButton.visibility = View.GONE
         optionsContainer.visibility = View.GONE
-        resultImageView.visibility = View.GONE
+        resultCardContainer.visibility = View.GONE
         loadingProgress.visibility = View.VISIBLE
 
         handler.postDelayed({
@@ -133,14 +135,25 @@ class QuizActivity : AppCompatActivity() {
         val mood = selectedMood ?: Mood.OK
         val resultDrawable = resultDrawableFor(weather, mood)
 
-        // TODO: 改成結果頁背景（若需要）
-        quizBackground.setImageResource(R.drawable.noteimageviewbackground)
+        quizBackground.setImageResource(resultBackgroundFor(weather))
 
         loadingProgress.visibility = View.GONE
         startButton.visibility = View.GONE
         optionsContainer.visibility = View.GONE
-        resultImageView.visibility = View.VISIBLE
+        resultCardContainer.visibility = View.VISIBLE
         resultImageView.setImageResource(resultDrawable)
+    }
+
+    private fun resultBackgroundFor(weather: Weather): Int {
+        val resourceName = when (weather) {
+            Weather.SUNNY -> "sun_result_background"
+            Weather.CLOUD -> "cloud_result_background"
+            Weather.RAIN -> "rain_result_background"
+        }
+
+        return resources.getIdentifier(resourceName, "drawable", packageName)
+            .takeIf { it != 0 }
+            ?: R.drawable.noteimageviewbackground
     }
 
     private fun resultDrawableFor(weather: Weather, mood: Mood): Int {

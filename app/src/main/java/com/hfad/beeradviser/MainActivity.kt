@@ -23,6 +23,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
 import com.hfad.beeradviser.ui.CopyrightFragment
+import com.hfad.beeradviser.ui.ManualGuideFragment
 import com.hfad.beeradviser.ui.MainViewModel
 import com.hfad.beeradviser.ui.MainViewModelFactory
 
@@ -87,10 +88,18 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
             startActivity(Intent(this, QuizActivity::class.java))
         }
 
-        findViewById<ImageButton>(R.id.imageButton6).setOnClickListener {
+        findViewById<ImageView>(R.id.TeamLogo1).setOnClickListener {
             if (supportFragmentManager.findFragmentByTag("COPYRIGHT_DIALOG") == null) {
                 supportFragmentManager.beginTransaction()
                     .add(android.R.id.content, CopyrightFragment(), "COPYRIGHT_DIALOG")
+                    .commit()
+            }
+        }
+
+        findViewById<ImageButton>(R.id.imageButton6).setOnClickListener {
+            if (supportFragmentManager.findFragmentByTag("MANUAL_GUIDE_DIALOG") == null) {
+                supportFragmentManager.beginTransaction()
+                    .add(android.R.id.content, ManualGuideFragment(), "MANUAL_GUIDE_DIALOG")
                     .commit()
             }
         }
