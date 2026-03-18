@@ -64,7 +64,7 @@ class QuizActivity : AppCompatActivity() {
 
     private fun showWeatherQuestionPage() {
         // TODO: 改成「第一題背景.png」
-        quizBackground.setImageResource(R.drawable.level_2_background)
+        quizBackground.setImageResource(R.drawable.quiz1_background)
 
         startButton.visibility = View.GONE
         loadingProgress.visibility = View.GONE
@@ -91,7 +91,7 @@ class QuizActivity : AppCompatActivity() {
 
     private fun showMoodQuestionPage() {
         // TODO: 改成「第二題背景.png」
-        quizBackground.setImageResource(R.drawable.level_4_background)
+        quizBackground.setImageResource(R.drawable.quiz2_background)
 
         startButton.visibility = View.GONE
         loadingProgress.visibility = View.GONE
