@@ -18,4 +18,5 @@
     <string name="quiz_option_button1_description">選項按鈕1</string>
     <string name="quiz_option_button2_description">選項按鈕2</string>
     <string name="quiz_option_button3_description">選項按鈕3</string>
+    <string name="manual_guide_page_description">新手指南頁面</string>
 </resources>

@@ -26,8 +26,8 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.hfad.beeradviser.data.Plant
 import com.hfad.beeradviser.data.PlantStatus
-import com.hfad.beeradviser.ui.CopyrightFragment
 import com.hfad.beeradviser.ui.GuideToIslandFragment
+import com.hfad.beeradviser.ui.ManualGuideFragment
 import com.hfad.beeradviser.ui.PlantCompletionCardFragment
 import com.hfad.beeradviser.ui.PlantPokedexViewModel
 import com.hfad.beeradviser.ui.PlantPokedexViewModelFactory
@@ -160,9 +160,9 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         }
 
         imageButton6.setOnClickListener {
-            if (supportFragmentManager.findFragmentByTag("COPYRIGHT_DIALOG") == null) {
+            if (supportFragmentManager.findFragmentByTag("MANUAL_GUIDE_DIALOG") == null) {
                 supportFragmentManager.beginTransaction()
-                    .add(android.R.id.content, CopyrightFragment(), "COPYRIGHT_DIALOG")
+                    .add(android.R.id.content, ManualGuideFragment(), "MANUAL_GUIDE_DIALOG")
                     .commit()
             }
         }
