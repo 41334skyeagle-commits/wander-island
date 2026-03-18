@@ -49,16 +49,14 @@ class QuizActivity : AppCompatActivity() {
         selectedWeather = null
         selectedMood = null
 
-        // TODO: 改成「開始頁背景.png」
-        quizBackground.setImageResource(R.drawable.island_1_bg)
+        quizBackground.setImageResource(R.drawable.quiz_page1_background)
 
         optionsContainer.visibility = View.GONE
         loadingProgress.visibility = View.GONE
         resultImageView.visibility = View.GONE
 
         startButton.visibility = View.VISIBLE
-        // TODO: 改成「開始測驗按鈕.png」
-        startButton.setImageResource(R.drawable.ic_button5)
+        startButton.setImageResource(R.drawable.start_quiz)
         startButton.setOnClickListener { showWeatherQuestionPage() }
     }
 
@@ -71,10 +69,9 @@ class QuizActivity : AppCompatActivity() {
         resultImageView.visibility = View.GONE
         optionsContainer.visibility = View.VISIBLE
 
-        // TODO: 改成 sunny/cloud/rain 的按鈕圖
-        optionButton1.setImageResource(R.drawable.ic_button1)
-        optionButton2.setImageResource(R.drawable.ic_button2)
-        optionButton3.setImageResource(R.drawable.ic_button3)
+        optionButton1.setImageResource(R.drawable.sun_option)
+        optionButton2.setImageResource(R.drawable.cloud_option)
+        optionButton3.setImageResource(R.drawable.rain_option)
 
         optionButton1.setOnClickListener {
             selectedWeather = Weather.SUNNY
@@ -99,10 +96,10 @@ class QuizActivity : AppCompatActivity() {
         resultImageView.visibility = View.GONE
         optionsContainer.visibility = View.VISIBLE
 
-        // TODO: 改成 nice/ok/sad 的按鈕圖
-        optionButton1.setImageResource(R.drawable.ic_button1)
-        optionButton2.setImageResource(R.drawable.ic_button2)
-        optionButton3.setImageResource(R.drawable.ic_button3)
+
+        optionButton1.setImageResource(R.drawable.nice_option)
+        optionButton2.setImageResource(R.drawable.ok_option)
+        optionButton3.setImageResource(R.drawable.sad_option)
 
         optionButton1.setOnClickListener {
             selectedMood = Mood.NICE
@@ -119,7 +116,6 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun showLoadingPage() {
-        // TODO: 改成「過渡頁面.png」
         quizBackground.setImageResource(R.drawable.quiz_loadingpage)
 
         startButton.visibility = View.GONE
