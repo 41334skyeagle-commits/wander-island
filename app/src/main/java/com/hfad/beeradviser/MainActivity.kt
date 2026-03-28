@@ -35,6 +35,7 @@ sealed class IslandBackground {
 class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListener {
     companion object {
         private const val TAG = "MainActivity"
+        private const val KEY_FIRST_LAUNCH_MANUAL_SHOWN = "key_first_launch_manual_shown"
     }
 
     private lateinit var viewPager: ViewPager2
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
 
         sharedPreferences = getSharedPreferences(SettingsFragment.PREFS_NAME, Context.MODE_PRIVATE)
         applyMusicSetting(sharedPreferences.getBoolean(SettingsFragment.KEY_MUSIC_ENABLED, true))
+        maybeShowManualGuideOnFirstLaunch(savedInstanceState)
     }
 
     private fun initViewModel() {
@@ -77,9 +79,11 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
 
         findViewById<ImageButton>(R.id.imageButton2).setOnClickListener {
             startActivity(Intent(this, ActivityB::class.java))
+            overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
         }
         findViewById<ImageButton>(R.id.imageButton4).setOnClickListener {
             startActivity(Intent(this, PokedexActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
         }
         findViewById<ImageButton>(R.id.imageButton1).setOnClickListener {
             SettingsFragment().show(supportFragmentManager, "settings_dialog_main")
@@ -89,6 +93,7 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
                 putExtra(QuizActivity.EXTRA_ENTRY_SOURCE, QuizActivity.ENTRY_MAIN)
             }
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
         }
 
         findViewById<ImageView>(R.id.TeamLogo1).setOnClickListener {
@@ -221,6 +226,22 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
             putExtra("level", islandId)
         }
         startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    }
+
+    private fun maybeShowManualGuideOnFirstLaunch(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) return
+
+        val hasShownGuide = sharedPreferences.getBoolean(KEY_FIRST_LAUNCH_MANUAL_SHOWN, false)
+        if (hasShownGuide) return
+
+        val fragmentTag = "MANUAL_GUIDE_DIALOG"
+        if (supportFragmentManager.findFragmentByTag(fragmentTag) == null) {
+            supportFragmentManager.beginTransaction()
+                .add(android.R.id.content, ManualGuideFragment(), fragmentTag)
+                .commit()
+            sharedPreferences.edit().putBoolean(KEY_FIRST_LAUNCH_MANUAL_SHOWN, true).apply()
+        }
     }
 
     private fun loadGifIntoButton(button: ImageButton, resId: Int) {

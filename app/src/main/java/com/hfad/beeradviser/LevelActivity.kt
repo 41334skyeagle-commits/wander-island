@@ -19,6 +19,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
@@ -61,6 +62,8 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
 
     // ic_button3 的逐格動畫控制器（播放中/暫停中各一組）
     private var startStopLoopAnimation: android.graphics.drawable.AnimationDrawable? = null
+    private var playLoopAnimation: android.graphics.drawable.AnimationDrawable? = null
+    private var pauseLoopAnimation: android.graphics.drawable.AnimationDrawable? = null
 
     private var startTime: Long = 0L
     private val handler = Handler(Looper.getMainLooper())
@@ -89,6 +92,8 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
     private lateinit var sharedPreferences: SharedPreferences
 
     private var soundPlayer: MediaPlayer? = null
+    private var lastStartStopClickAt = 0L
+    private val startStopClickThrottleMs = 250L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,6 +138,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         noteButton.setOnClickListener {
             val intent = Intent(this, ActivityB::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
         }
 
         imageButton4.setOnClickListener {
@@ -143,10 +149,12 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
                     putExtra("ISLAND_ID", islandId)
                 }
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
             } else {
                 Toast.makeText(this, "錯誤：無法識別當前島嶼，跳轉失敗。", Toast.LENGTH_SHORT).show()
                 // 作為備用，如果 levelNumber 為 -1，仍然可以嘗試跳轉，但不傳 ID，PokedexActivity 將使用預設值 1。
                 startActivity(Intent(this, PokedexActivity::class.java))
+                overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
             }
         }
 
@@ -161,6 +169,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
                 putExtra(QuizActivity.EXTRA_LEVEL_ID, islandId)
             }
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top)
         }
 
         imageButton6.setOnClickListener {
@@ -175,6 +184,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         imageButton8.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             finish()
         }
 
@@ -207,6 +217,12 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         }
 
         startStopButton.setOnClickListener {
+            val now = SystemClock.elapsedRealtime()
+            if (now - lastStartStopClickAt < startStopClickThrottleMs) {
+                return@setOnClickListener
+            }
+            lastStartStopClickAt = now
+
             if (!isTimerRunning) {
                 startTimer()
                 playTimerWaveEffect(isStartAction = true)
@@ -285,16 +301,15 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
      */
     private fun updateStartStopButtonLoopAnimation(isTimerRunning: Boolean) {
         startStopLoopAnimation?.stop()
+        ensureStartStopAnimationsCached()
 
-        val animation = if (isTimerRunning) {
-            buildFrameAnimation(prefix = "ic_mediapause_", start = 0, end = 38, fps = 15)
-        } else {
-            buildFrameAnimation(prefix = "ic_mediaplay_", start = 0, end = 37, fps = 15)
-        }
+        val animation = if (isTimerRunning) pauseLoopAnimation else playLoopAnimation
 
         if (animation != null) {
             startStopLoopAnimation = animation
             startStopButton.setImageDrawable(animation)
+            animation.stop()
+            animation.selectDrawable(0)
             animation.start()
         } else {
             // 若尚未匯入逐格圖，保留可執行性（fallback 到既有靜態圖）
@@ -303,45 +318,20 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         }
     }
 
-    /**
-     * 動態組裝逐格動畫，避免在 XML animation-list 內綁死資源，
-     * 讓你只要把對應檔名的 PNG 匯入即可直接生效。
-     */
-    private fun buildFrameAnimation(
-        prefix: String,
-        start: Int,
-        end: Int,
-        fps: Int,
-        scaleInset: Int = 250
+    private fun ensureStartStopAnimationsCached() {
+        if (playLoopAnimation == null) {
+            playLoopAnimation = loadLoopAnimation(R.drawable.anim_start_stop_play)
+        }
+        if (pauseLoopAnimation == null) {
+            pauseLoopAnimation = loadLoopAnimation(R.drawable.anim_start_stop_pause)
+        }
+    }
+
+    private fun loadLoopAnimation(
+        @DrawableRes animationResId: Int
     ): android.graphics.drawable.AnimationDrawable? {
-        val frameDurationMs = (1000f / fps).toInt().coerceAtLeast(1)
-        val animation = android.graphics.drawable.AnimationDrawable().apply {
-            isOneShot = false
-        }
-
-        for (index in start..end) {
-            val frameName = String.format(Locale.US, "%s%03d", prefix, index)
-            val frameResId = resources.getIdentifier(frameName, "drawable", packageName)
-
-            if (frameResId == 0) {
-                Log.w(TAG, "逐格動畫缺少資源：$frameName，改用 fallback 靜態圖。")
-                return null
-            }
-
-            val frameDrawable = resources.getDrawable(frameResId, theme)
-
-            // --- 修改部分：套用負向 Inset ---
-            val finalDrawable = if (scaleInset != 0) {
-                // 傳入負值會使 Drawable 向外擴張，達成放大效果
-                // 四個參數分別為：left, top, right, bottom
-                android.graphics.drawable.InsetDrawable(frameDrawable, -scaleInset)
-            } else {
-                frameDrawable
-            }
-            animation.addFrame(finalDrawable, frameDurationMs)
-        }
-
-        return animation
+        val drawable = resources.getDrawable(animationResId, theme)
+        return drawable as? android.graphics.drawable.AnimationDrawable
     }
 
     /**
@@ -358,6 +348,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
             return
         }
 
+        timerWaveOverlay.animate().cancel()
         timerWaveOverlay.setImageResource(resId)
         timerWaveOverlay.visibility = View.VISIBLE
         timerWaveOverlay.alpha = 0.9f
@@ -840,6 +831,12 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         updateStartStopButtonLoopAnimation(isTimerRunning = false)
         // 在 Activity 重新啟動/返回時更新驚嘆號狀態
         updatePokedexButtonUI()
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
     private fun getStage3AnimationResources(level: Int): List<Int> {

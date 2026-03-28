@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:oneshot="false">
+    <item android:drawable="@drawable/ic_mediapause_000" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_001" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_002" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_003" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_004" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_005" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_006" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_007" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_008" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_009" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_010" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_011" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_012" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_013" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_014" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_015" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_016" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_017" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_018" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_019" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_020" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_021" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_022" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_023" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_024" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_025" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_026" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_027" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_028" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_029" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_030" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_031" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_032" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_033" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_034" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_035" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_036" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_037" android:duration="66" />
+    <item android:drawable="@drawable/ic_mediapause_038" android:duration="66" />
+</animation-list>
