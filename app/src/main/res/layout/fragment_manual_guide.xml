@@ -15,4 +15,11 @@
         android:contentDescription="@string/manual_guide_page_description"
         android:scaleType="fitCenter" />
 
+    <ImageView
+        android:id="@+id/clickImageContinue"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="185dp"
+        android:scaleType="fitCenter" />
 </FrameLayout>
