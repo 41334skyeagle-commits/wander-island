@@ -19,6 +19,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
@@ -307,6 +308,8 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         if (animation != null) {
             startStopLoopAnimation = animation
             startStopButton.setImageDrawable(animation)
+            animation.stop()
+            animation.selectDrawable(0)
             animation.start()
         } else {
             // 若尚未匯入逐格圖，保留可執行性（fallback 到既有靜態圖）
@@ -317,52 +320,18 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
 
     private fun ensureStartStopAnimationsCached() {
         if (playLoopAnimation == null) {
-            playLoopAnimation = buildFrameAnimation(prefix = "ic_mediaplay_", start = 0, end = 37, fps = 15)
+            playLoopAnimation = loadLoopAnimation(R.drawable.anim_start_stop_play)
         }
         if (pauseLoopAnimation == null) {
-            pauseLoopAnimation = buildFrameAnimation(prefix = "ic_mediapause_", start = 0, end = 38, fps = 15)
+            pauseLoopAnimation = loadLoopAnimation(R.drawable.anim_start_stop_pause)
         }
     }
 
-    /**
-     * 動態組裝逐格動畫，避免在 XML animation-list 內綁死資源，
-     * 讓你只要把對應檔名的 PNG 匯入即可直接生效。
-     */
-    private fun buildFrameAnimation(
-        prefix: String,
-        start: Int,
-        end: Int,
-        fps: Int,
-        scaleInset: Int = 250
+    private fun loadLoopAnimation(
+        @DrawableRes animationResId: Int
     ): android.graphics.drawable.AnimationDrawable? {
-        val frameDurationMs = (1000f / fps).toInt().coerceAtLeast(1)
-        val animation = android.graphics.drawable.AnimationDrawable().apply {
-            isOneShot = false
-        }
-
-        for (index in start..end) {
-            val frameName = String.format(Locale.US, "%s%03d", prefix, index)
-            val frameResId = resources.getIdentifier(frameName, "drawable", packageName)
-
-            if (frameResId == 0) {
-                Log.w(TAG, "逐格動畫缺少資源：$frameName，改用 fallback 靜態圖。")
-                return null
-            }
-
-            val frameDrawable = resources.getDrawable(frameResId, theme)
-
-            // --- 修改部分：套用負向 Inset ---
-            val finalDrawable = if (scaleInset != 0) {
-                // 傳入負值會使 Drawable 向外擴張，達成放大效果
-                // 四個參數分別為：left, top, right, bottom
-                android.graphics.drawable.InsetDrawable(frameDrawable, -scaleInset)
-            } else {
-                frameDrawable
-            }
-            animation.addFrame(finalDrawable, frameDurationMs)
-        }
-
-        return animation
+        val drawable = resources.getDrawable(animationResId, theme)
+        return drawable as? android.graphics.drawable.AnimationDrawable
     }
 
     /**
