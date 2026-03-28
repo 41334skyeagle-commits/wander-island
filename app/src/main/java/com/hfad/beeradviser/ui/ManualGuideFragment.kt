@@ -2,6 +2,9 @@ package com.hfad.beeradviser.ui
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.hfad.beeradviser.R
@@ -16,11 +19,21 @@ class ManualGuideFragment : Fragment(R.layout.fragment_manual_guide) {
         super.onViewCreated(view, savedInstanceState)
 
         manualPageImage = view.findViewById(R.id.manualPageImage)
+        val clickImageContinue = view.findViewById<ImageView>(R.id.clickImageContinue)
 
         if (manualPages.isEmpty()) {
             parentFragmentManager.beginTransaction().remove(this).commitAllowingStateLoss()
             return
         }
+
+        clickImageContinue.setImageResource(R.drawable.click_image_continue)
+        val breathingAnim = AlphaAnimation(0.2f, 1.0f).apply {
+            duration = 1000
+            repeatMode = Animation.REVERSE
+            repeatCount = Animation.INFINITE
+            interpolator = LinearInterpolator()
+        }
+        clickImageContinue.startAnimation(breathingAnim)
 
         renderCurrentPage()
 
