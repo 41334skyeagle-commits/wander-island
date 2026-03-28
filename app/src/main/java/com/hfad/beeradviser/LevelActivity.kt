@@ -156,7 +156,11 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         }
 
         quizButton.setOnClickListener {
-            startActivity(Intent(this, QuizActivity::class.java))
+            val intent = Intent(this, QuizActivity::class.java).apply {
+                putExtra(QuizActivity.EXTRA_ENTRY_SOURCE, QuizActivity.ENTRY_LEVEL)
+                putExtra(QuizActivity.EXTRA_LEVEL_ID, islandId)
+            }
+            startActivity(intent)
         }
 
         imageButton6.setOnClickListener {
