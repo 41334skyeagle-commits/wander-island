@@ -17,9 +17,9 @@
 
     <ImageView
         android:id="@+id/clickImageContinue"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="center"
-        android:layout_marginTop="185dp"
+        android:layout_marginTop="280dp"
         android:scaleType="fitCenter" />
 </FrameLayout>

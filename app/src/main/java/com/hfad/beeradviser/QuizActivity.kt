@@ -88,7 +88,6 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun showWeatherQuestionPage() {
-        // TODO: 改成「第一題背景.png」
         quizBackground.setImageResource(R.drawable.quiz1_background)
 
         stopShimmer()
@@ -118,7 +117,6 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun showMoodQuestionPage() {
-        // TODO: 改成「第二題背景.png」
         quizBackground.setImageResource(R.drawable.quiz2_background)
 
         stopShimmer()

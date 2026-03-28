@@ -27,7 +27,7 @@ class ManualGuideFragment : Fragment(R.layout.fragment_manual_guide) {
         }
 
         clickImageContinue.setImageResource(R.drawable.click_image_continue)
-        val breathingAnim = AlphaAnimation(0.2f, 1.0f).apply {
+        val breathingAnim = AlphaAnimation(0f, 0.8f).apply {
             duration = 1000
             repeatMode = Animation.REVERSE
             repeatCount = Animation.INFINITE
