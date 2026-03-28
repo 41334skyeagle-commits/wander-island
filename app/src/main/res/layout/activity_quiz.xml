@@ -10,16 +10,28 @@
         android:contentDescription="@string/quiz_background_description"
         android:scaleType="centerCrop" />
 
-    <ImageButton
-        android:id="@+id/startButton"
+    <FrameLayout
+        android:id="@+id/startButtonContainer"
         android:layout_width="220dp"
         android:layout_height="90dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/quiz_start_button_description"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_button5" />
+        android:layout_marginBottom="20dp">
+
+        <ImageButton
+            android:id="@+id/startButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/quiz_start_button_description"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_button5" />
+
+        <View
+            android:id="@+id/startButtonShimmerRay"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shimmer_light_ray" />
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/optionsContainer"
@@ -85,5 +97,18 @@
             android:scaleType="fitCenter" />
 
     </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/resultExitButton"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_gravity="top|start"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/quiz_result_exit_button_description"
+        android:scaleType="fitCenter"
+        android:src="@drawable/copyright_page_close_exit"
+        android:visibility="gone" />
 
 </FrameLayout>

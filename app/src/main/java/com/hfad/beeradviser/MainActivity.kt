@@ -85,7 +85,10 @@ class MainActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListene
             SettingsFragment().show(supportFragmentManager, "settings_dialog_main")
         }
         findViewById<ImageButton>(R.id.imageButton5).setOnClickListener {
-            startActivity(Intent(this, QuizActivity::class.java))
+            val intent = Intent(this, QuizActivity::class.java).apply {
+                putExtra(QuizActivity.EXTRA_ENTRY_SOURCE, QuizActivity.ENTRY_MAIN)
+            }
+            startActivity(intent)
         }
 
         findViewById<ImageView>(R.id.TeamLogo1).setOnClickListener {
