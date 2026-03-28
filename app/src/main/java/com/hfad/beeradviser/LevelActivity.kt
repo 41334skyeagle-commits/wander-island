@@ -3,6 +3,7 @@ package com.hfad.beeradviser
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Matrix
 import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.media.MediaPlayer
@@ -94,6 +95,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
     private var soundPlayer: MediaPlayer? = null
     private var lastStartStopClickAt = 0L
     private val startStopClickThrottleMs = 250L
+    private val startStopImageScale = 1.14f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,6 +136,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         setButtonState(true)
         // 初始狀態：尚未開始計時，顯示「播放中」迴圈逐格動畫
         updateStartStopButtonLoopAnimation(isTimerRunning = false)
+        startStopButton.post { applyStartStopImageScale() }
 
         noteButton.setOnClickListener {
             val intent = Intent(this, ActivityB::class.java)
@@ -308,6 +311,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         if (animation != null) {
             startStopLoopAnimation = animation
             startStopButton.setImageDrawable(animation)
+            applyStartStopImageScale()
             animation.stop()
             animation.selectDrawable(0)
             animation.start()
@@ -315,6 +319,26 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
             // 若尚未匯入逐格圖，保留可執行性（fallback 到既有靜態圖）
             val fallbackRes = if (isTimerRunning) R.drawable.ic_media_pause else R.drawable.ic_media_play
             startStopButton.setImageResource(fallbackRes)
+            applyStartStopImageScale()
+        }
+    }
+
+    private fun applyStartStopImageScale() {
+        startStopButton.scaleType = ImageView.ScaleType.MATRIX
+        val drawable = startStopButton.drawable ?: return
+        val viewWidth = (startStopButton.width - startStopButton.paddingLeft - startStopButton.paddingRight).toFloat()
+        val viewHeight = (startStopButton.height - startStopButton.paddingTop - startStopButton.paddingBottom).toFloat()
+        val drawableWidth = drawable.intrinsicWidth.toFloat().takeIf { it > 0f } ?: return
+        val drawableHeight = drawable.intrinsicHeight.toFloat().takeIf { it > 0f } ?: return
+
+        val baseScale = minOf(viewWidth / drawableWidth, viewHeight / drawableHeight)
+        val finalScale = baseScale * startStopImageScale
+        val dx = startStopButton.paddingLeft + (viewWidth - drawableWidth * finalScale) / 2f
+        val dy = startStopButton.paddingTop + (viewHeight - drawableHeight * finalScale) / 2f
+
+        startStopButton.imageMatrix = Matrix().apply {
+            setScale(finalScale, finalScale)
+            postTranslate(dx, dy)
         }
     }
 
@@ -829,6 +853,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
         setButtonState(true)
         // 初始狀態：尚未開始計時，顯示「播放中」迴圈逐格動畫
         updateStartStopButtonLoopAnimation(isTimerRunning = false)
+        startStopButton.post { applyStartStopImageScale() }
         // 在 Activity 重新啟動/返回時更新驚嘆號狀態
         updatePokedexButtonUI()
     }
