@@ -72,8 +72,8 @@
     <!-- 返回按鈕 (保持在最上層) -->
     <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
         android:background="@android:color/transparent"

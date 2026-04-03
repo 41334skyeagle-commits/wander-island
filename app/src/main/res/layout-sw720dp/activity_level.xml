@@ -150,7 +150,6 @@
         android:minHeight="48dp"
         android:contentDescription="@string/button5_description"
         android:src="@drawable/ic_button5"
-        android:visibility="gone"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="@+id/imageButton1"
@@ -159,12 +158,12 @@
     <!-- ImageButton8 (與 TeamLogo1 對稱放置) -->
     <ImageButton
         android:id="@+id/imageButton8"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_back_arrow"
         android:background="@android:color/transparent"
@@ -267,14 +266,15 @@
 
     <ImageButton
         android:id="@+id/imageButton3"
-        android:layout_width="240dp"
-        android:layout_height="240dp"
-        android:layout_marginBottom="35dp"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/button3_description"
         android:padding="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button3"
+        android:layout_marginBottom="90dp"
+        app:layout_constraintTop_toBottomOf="@+id/plant_image_bubble"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageButton2"
         app:layout_constraintStart_toEndOf="@+id/pokedex_button_container" />

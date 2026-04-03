@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/img_combined_background_large"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:contentDescription="日記大版縮圖背景與裝飾"
         android:paddingEnd="15dp"
         android:scaleType="centerCrop"
