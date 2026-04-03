@@ -13,10 +13,10 @@
 
     <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="43dp"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:contentDescription="返回上一頁按鈕"
         android:scaleType="fitCenter"
@@ -25,19 +25,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="4dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="6dp">
+        android:paddingHorizontal="24dp">
 
         <TextView
             android:id="@+id/dateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="46dp"
             android:text="2025年10月11日"
             android:textColor="@android:color/black"
-            android:textSize="35sp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -46,31 +46,33 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="130dp"
-        android:layout_marginBottom="100dp"
-        android:paddingBottom="50dp">
+        android:layout_marginTop="122dp"
+        android:layout_marginBottom="24dp"
+        android:clipToPadding="false"
+        android:paddingBottom="24dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="18dp"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="6dp">
+            android:paddingHorizontal="26dp"
+            android:paddingBottom="16dp">
 
             <LinearLayout
                 android:id="@+id/emotionSelectorContainer"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="140dp"
+                android:layout_marginBottom="14dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/niceEmojiImageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_width="104dp"
+                    android:layout_height="104dp"
+                    android:layout_marginHorizontal="24dp"
                     android:clickable="true"
                     android:contentDescription="好"
                     android:focusable="true"
@@ -78,9 +80,9 @@
 
                 <ImageView
                     android:id="@+id/okEmojiImageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_width="104dp"
+                    android:layout_height="104dp"
+                    android:layout_marginHorizontal="24dp"
                     android:clickable="true"
                     android:contentDescription="普通"
                     android:focusable="true"
@@ -88,9 +90,9 @@
 
                 <ImageView
                     android:id="@+id/sadEmojiImageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_width="104dp"
+                    android:layout_height="104dp"
+                    android:layout_marginHorizontal="24dp"
                     android:clickable="true"
                     android:contentDescription="不好"
                     android:focusable="true"
@@ -102,21 +104,23 @@
                 android:id="@+id/titleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="14dp"
                 android:background="@android:color/transparent"
                 android:hint="標題"
                 android:inputType="text"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="30dp"
+                android:minHeight="48dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="14dp"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textColorHint="#CCCCCC" />
+                android:textColorHint="#CCCCCC"
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/guideWord1ImageView"
-                android:layout_width="350dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="14dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="引導語一"
                 android:scaleType="fitCenter" />
@@ -124,9 +128,9 @@
 
             <ImageView
                 android:id="@+id/photoUploadArea"
-                android:layout_width="450dp"
-                android:layout_height="450dp"
-                android:layout_marginBottom="12dp"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:layout_marginBottom="14dp"
                 android:background="@android:color/transparent"
                 android:clickable="true"
                 android:contentDescription="上傳照片區域"
@@ -137,20 +141,19 @@
 
             <ImageView
                 android:id="@+id/guideWord2ImageView"
-                android:layout_width="350dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="引導語二"
                 android:scaleType="fitCenter" />
 
             <ImageView
                 android:id="@+id/upSwipeHintImageView"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="160dp"
-                android:layout_marginBottom="250dp"
+                android:layout_width="132dp"
+                android:layout_height="132dp"
+                android:layout_marginBottom="20dp"
                 android:contentDescription="上滑切換下一頁"
                 android:src="@drawable/up_inputpage1" />
 
