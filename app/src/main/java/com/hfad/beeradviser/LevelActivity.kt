@@ -95,7 +95,7 @@ class LevelActivity : AppCompatActivity(), SettingsFragment.SettingsChangeListen
     private var soundPlayer: MediaPlayer? = null
     private var lastStartStopClickAt = 0L
     private val startStopClickThrottleMs = 250L
-    private val startStopImageScale = 1.14f
+    private val startStopImageScale = 1.18f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

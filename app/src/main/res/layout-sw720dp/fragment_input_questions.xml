@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/noteinputbackground2ImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="日記背景圖片第二頁"
+        android:scaleType="centerCrop"
+        android:src="@drawable/noteinputbackground2" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="140dp"
+        android:paddingBottom="120dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/question1TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="問題一"
+                android:scaleType="fitStart" />
+
+            <EditText
+                android:id="@+id/content1EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="top|start"
+                android:hint="請寫下你的回答..."
+                android:minHeight="90dp"
+                android:padding="10dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="#CCCCCC" />
+
+            <ImageView
+                android:id="@+id/question2TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="問題二"
+                android:scaleType="fitStart" />
+
+            <EditText
+                android:id="@+id/content2EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="top|start"
+                android:hint="請寫下你的回答..."
+                android:minHeight="90dp"
+                android:padding="10dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="#CCCCCC" />
+
+            <ImageView
+                android:id="@+id/question3TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="問題三"
+                android:scaleType="fitStart" />
+
+            <EditText
+                android:id="@+id/content3EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="top|start"
+                android:hint="請寫下你的回答..."
+                android:minHeight="90dp"
+                android:padding="10dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="#CCCCCC" />
+
+            <ImageView
+                android:id="@+id/question4ImageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="問題四"
+                android:scaleType="fitStart" />
+
+            <EditText
+                android:id="@+id/content4EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="350dp"
+                android:background="@android:color/transparent"
+                android:gravity="top|start"
+                android:hint="請寫下你的回答..."
+                android:minHeight="90dp"
+                android:padding="10dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="#CCCCCC" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="2025年10月11日"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/downSwipeHintImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="5dp"
+            android:contentDescription="下滑返回上一頁"
+            android:src="@drawable/down_inputpage2" />
+
+    </LinearLayout>
+
+</RelativeLayout>

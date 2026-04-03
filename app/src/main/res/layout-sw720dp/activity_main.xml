@@ -109,7 +109,6 @@
         android:minHeight="48dp"
         android:contentDescription="@string/button5_description"
         android:src="@drawable/ic_button5"
-        android:visibility="gone"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
