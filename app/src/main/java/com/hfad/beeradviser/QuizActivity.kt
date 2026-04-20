@@ -247,7 +247,10 @@ class QuizActivity : AppCompatActivity() {
             Mood.SAD -> "sad"
         }
 
-        val maxPlan = if (weather == Weather.SUNNY) 5 else 4
+        val maxPlan = when (weather) {
+            Weather.SUNNY, Weather.RAIN -> 5
+            Weather.CLOUD -> 4
+        }
         val candidateNames = (1..maxPlan).map { index ->
             "${weatherPrefix}${moodPrefix}plan${index}"
         }.shuffled(Random(System.currentTimeMillis()))
